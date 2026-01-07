@@ -7,7 +7,7 @@
     <style>
         :root {
             --bg: #030803;
-            --card-bg: rgba(7, 20, 10, 0.95);
+            --card-bg: rgba(7, 22, 12, 0.97);
             --primary: #2ecc71;
             --gold: #f1c40f;
             --text: #e0f0e0;
@@ -25,20 +25,13 @@
             align-items: center;
         }
 
-        /* --- АНИМИРОВАННЫЙ ФОН (Зеленые искры) --- */
-        #canvas {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-        }
-
+        #canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
         .container { width: 100%; max-width: 650px; padding: 20px; z-index: 1; }
 
         header { text-align: center; padding: 30px 0; }
         .logo { font-size: 4rem; filter: drop-shadow(0 0 15px var(--primary)); }
         h1 { font-size: 2.5rem; letter-spacing: 4px; color: var(--primary); text-transform: uppercase; }
 
-        /* --- КАРТОЧКИ --- */
         .card {
             background: var(--card-bg);
             border: 1px solid rgba(46, 204, 113, 0.2);
@@ -50,7 +43,6 @@
         }
 
         .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-
         .btn {
             background: rgba(255,255,255,0.05);
             border: 1px solid var(--primary);
@@ -59,39 +51,49 @@
             text-align: center; transition: 0.3s;
             display: flex; flex-direction: column; align-items: center; gap: 8px;
         }
-        .btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 20px var(--primary); transform: translateY(-2px); }
+        .btn:hover { background: var(--primary); color: #000; transform: translateY(-2px); }
         .btn-main { grid-column: span 2; background: var(--primary); color: #000; font-size: 1.2rem; }
 
         /* --- ЗАЛ СЛАВЫ --- */
         .hall-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 15px; }
         .member { 
             text-align: center; padding: 12px; border: 1px solid var(--gold); 
-            border-radius: 12px; font-size: 0.85rem; background: rgba(241, 196, 15, 0.05);
+            border-radius: 12px; font-size: 0.75rem; background: rgba(241, 196, 15, 0.05);
         }
-        .member b { display: block; color: var(--gold); font-size: 1.1rem; margin-bottom: 4px; }
+        .member b { display: block; color: var(--gold); font-size: 0.95rem; margin-bottom: 2px; }
 
-        /* --- ФОРМА --- */
+        /* --- ПРАВИЛА И ТЕКСТ --- */
+        .full-rules { text-align: left; font-size: 1.05rem; line-height: 1.5; }
+        .rules-cat { color: var(--primary); font-weight: bold; margin-top: 15px; display: block; border-bottom: 1px solid #2ecc7144; padding-bottom: 3px; margin-bottom: 8px;}
+
+        /* --- ДОНАТЫ --- */
+        .don-item { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #222; }
+        .don-item:last-child { border: none; }
+        .don-title { color: var(--gold); font-size: 1.3rem; font-weight: bold; }
+        .don-price { background: #f1c40f33; padding: 2px 8px; border-radius: 5px; font-size: 0.9rem; }
+        .don-list { margin-top: 8px; list-style: none; font-size: 0.95rem; opacity: 0.9; }
+        .don-list li::before { content: "🔹 "; color: var(--gold); }
+
+        /* --- АНКЕТА --- */
         input, textarea {
             width: 100%; padding: 14px; margin: 10px 0;
             background: rgba(0,0,0,0.6); border: 1px solid var(--primary);
             color: white; border-radius: 10px; font-size: 1rem;
         }
         .submit-btn {
-            width: 100%; background: var(--primary); color: black;
-            border: none; padding: 16px; border-radius: 10px; 
-            font-weight: bold; cursor: pointer; font-size: 1.1rem; margin-top: 10px;
+            width: 100%; background: var(--primary); color: black; border: none; 
+            padding: 16px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1.1rem;
         }
 
         .page { display: none; animation: fadeIn 0.4s ease forwards; }
         .page.active { display: block; }
-
         .back-btn {
             display: block; width: 100%; margin-top: 25px; padding: 15px;
             border: 2px solid var(--primary); background: none; color: var(--primary);
-            border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 1.1rem;
+            border-radius: 12px; font-weight: bold; cursor: pointer;
         }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -104,15 +106,15 @@
             <header>
                 <div class="logo">🗽</div>
                 <h1>ВЕЛИКИЕ</h1>
-                <p style="opacity: 0.7;">Сообщество Великих Людей</p>
+                <p style="opacity: 0.8;">Цифровая обитель сообщества</p>
             </header>
 
             <div class="card">
-                <h3 style="color: var(--gold); text-align: center; text-transform: uppercase; letter-spacing: 2px;">🏆 Зал Славы</h3>
+                <h3 style="color: var(--gold); text-align: center; text-transform: uppercase;">🏆 Зал Славы</h3>
                 <div class="hall-grid">
-                    <div class="member"><b>Kuma</b>Владелец</div>
-                    <div class="member"><b>Ann</b>Заместитель</div>
-                    <div class="member"><b>???</b>Твой ник?</div>
+                    <div class="member"><b>Димасик</b>@im_skywallker</div>
+                    <div class="member"><b>NIGHTMARE</b>Актив</div>
+                    <div class="member"><b>Соска</b>@Ezjik9</div>
                 </div>
             </div>
 
@@ -120,92 +122,115 @@
                 <a href="https://t.me/VelikieBs" class="btn btn-main">🚀 ВОЙТИ В ЧАТ</a>
                 <div class="btn" onclick="showPage('rules')">📜 Законы</div>
                 <div class="btn" onclick="showPage('donate')">💎 Донаты</div>
-                <div class="btn" onclick="showPage('chats')">🔗 Наши Ресурсы</div>
-                <div class="btn" onclick="showPage('admin')">📝 Подать заявку</div>
+                <div class="btn" onclick="showPage('chats')">🔗 Ресурсы</div>
+                <div class="btn" onclick="showPage('admin')">📝 Анкета</div>
                 <a href="https://t.me/KumaWelikiy" class="btn" style="grid-column: span 2; border-color: #444;">👤 Связаться с владельцем</a>
             </div>
         </div>
 
         <div id="rules" class="page">
-            <div class="card">
-                <h2 style="color: var(--primary)">🌋 ВЕЛИКИЕ ЗАКОНЫ</h2>
-                <div style="text-align: left; margin-top: 20px; line-height: 1.6; font-size: 1.05rem;">
-                    <b style="color: var(--primary)">🚫 Запрещено:</b><br>
-                    • СПАМ/Флуд — мут до 1ч<br>
-                    • РЕКЛАМА — бан<br>
-                    • 18+ только после 22:00 МСК<br><br>
-                    <b style="color: var(--primary)">📮 Темы-табу:</b><br>
-                    • Оскорбление наций, политика, религия<br>
-                    • Наркотики, Пдф — БАН<br><br>
-                    <b style="color: var(--primary)">🧨 Порядок:</b><br>
-                    • 4 предупреждения = БАН<br>
-                    • Обход мута = х2 срок
-                </div>
+            <div class="card full-rules">
+                <h2 style="color: var(--primary); text-align:center;">🌋 ВЕЛИКИЕ ЗАКОНЫ</h2>
+                
+                <span class="rules-cat">🚫 ЗАПРЕЩЕНО:</span>
+                • <b>СПАМ</b> (лесенки, повторы, гиф, видео, флуд командами) — мут 15 мин-1ч<br>
+                • <b>РЕКЛАМА</b> (любая) без согласования — мут/бан<br>
+                • Замещение владельца без разрешения — мут/бан<br>
+                • Контент 18+ 16+ (<b>разрешён после 22:00 МСК</b>, но запрещены всегда: детский контент, зоофилия, насилие) — мут-пред<br>
+                
+                <span class="rules-cat">📮 ТЕМЫ-ТАБУ:</span>
+                • Оскорбления нации, религия, политика, дипломатия — мут 10–35 мин<br>
+                • Обсуждение наркотиков на серьёзной основе — мут 25 мин–24 ч / пред / бан<br>
+                • Треш-контент — Мут/Пред / бан<br>
+                • <b>Пдф (пидофилия)</b> — пред-бан, запрещено по факту — мут/пред<br>
+
+                <span class="rules-cat">📍 ПОРЯДОК:</span>
+                • Конфликты, провокации, оскорбления — мут 15 мин – 1 ч / пред / бан<br>
+                • Обход наказания — ×2 к сроку мута / бан<br>
+                • Ложный репорт — мут 15–25 мин.<br>
+
+                <span class="rules-cat">♦️ ДОПОЛНИТЕЛЬНО:</span>
+                • Администрация вправе наказывать без предупреждения при повторе.<br>
+                • После <b>4 предупреждений</b> — автоматический бан.<br>
+                • В спорных ситуациях решение принимает владелец / зам / старшие админы.
             </div>
-            <button class="back-btn" onclick="showPage('home')">← ВЕРНУТЬСЯ</button>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
         </div>
 
         <div id="donate" class="page">
             <div class="card">
-                <h2 style="color: var(--gold)">💎 ПОДДЕРЖКА</h2>
-                <div style="margin: 20px 0; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 10px;">
-                    <b>💛 Спонсор (200₽)</b><br><small>Префикс + чаще спам</small>
-                </div>
-                <div style="margin: 20px 0; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 10px; border-left: 3px solid var(--gold);">
-                    <b>💛 Спонсор+ (400₽)</b><br><small>Чат админов + Кандидат в модераторы</small>
-                </div>
-                <div style="margin: 20px 0; background: rgba(241, 196, 15, 0.1); padding: 15px; border-radius: 10px;">
-                    <b>💎 Инвестор (5000₽)</b><br><small>Полный иммунитет + Реклама своих каналов</small>
-                </div>
+                <h2 style="color: var(--gold); text-align:center; margin-bottom:20px;">💎 ПОДДЕРЖИТЕ ПРОЕКТ</h2>
                 
-                <div style="background: rgba(0,0,0,0.4); padding: 20px; border-radius: 15px; margin-top: 20px; text-align: center; border: 1px dashed var(--gold);">
-                    <p>Номер карты Сбер:</p>
-                    <h2 id="card-num" onclick="copyCard()" style="cursor: pointer; color: var(--gold); letter-spacing: 1px; margin: 10px 0;">2202205034828175</h2>
-                    <small style="opacity: 0.6;">(Нажми на номер, чтобы скопировать)</small>
+                <div class="don-item">
+                    <div class="don-title">💛 Спонсор <span class="don-price">200 ₽ / 60 дней</span></div>
+                    <ul class="don-list">
+                        <li>Префикс: спонсор</li>
+                        <li>Только админы могут выдавать наказания</li>
+                        <li>Можно спамить чаще</li>
+                    </ul>
                 </div>
-                <a href="https://t.me/KumaWelikiy" class="submit-btn" style="text-decoration:none; display:block; text-align:center; background: var(--gold);">ОТПРАВИТЬ ЧЕК</a>
+
+                <div class="don-item">
+                    <div class="don-title">💛 Спонсор+ <span class="don-price">400 ₽ / 60 дней</span></div>
+                    <ul class="don-list">
+                        <li>Префикс: высший спонсор</li>
+                        <li>Доступ в чат админов</li>
+                        <li>Можно предлагать идеи и подавать заявку модератора</li>
+                    </ul>
+                </div>
+
+                <div class="don-item">
+                    <div class="don-title">💎 Инвестор <span class="don-price">5000 ₽ / 1 год</span></div>
+                    <ul class="don-list">
+                        <li>Может банить только владелец</li>
+                        <li>Нельзя замутить/варн</li>
+                        <li>Удалять сообщения, управлять трансляциями</li>
+                        <li>Рекламировать свои каналы, жалобы в первую очередь</li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(0,0,0,0.4); padding: 20px; border-radius: 15px; margin-top: 10px; text-align: center; border: 1px dashed var(--gold);">
+                    <p>Карта Сбер:</p>
+                    <h2 onclick="navigator.clipboard.writeText('2202205034828175'); alert('Скопировано!')" style="cursor: pointer; color: var(--gold); margin: 10px 0;">2202 2050 3482 8175</h2>
+                    <small>(Нажми на номер, чтобы скопировать)</small>
+                </div>
+                <a href="https://t.me/KumaWelikiy" class="submit-btn" style="text-decoration:none; display:block; text-align:center; background: var(--gold); margin-top:15px;">ОТПРАВИТЬ ЧЕК</a>
             </div>
-            <button class="back-btn" onclick="showPage('home')">← ВЕРНУТЬСЯ</button>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
         </div>
 
         <div id="admin" class="page">
             <div class="card">
                 <h2>📝 СТАТЬ АДМИНОМ</h2>
-                <p style="opacity: 0.7; margin-bottom: 15px;">Заполни анкету, и она придет в наш админ-чат.</p>
-                <input type="text" id="form-name" placeholder="Твой ник и возраст">
+                <input type="text" id="form-name" placeholder="Ник и возраст">
                 <input type="text" id="form-tg" placeholder="Твой @username">
-                <textarea id="form-exp" rows="5" placeholder="Расскажи о себе: был ли опыт, сколько времени готов уделять чату?"></textarea>
-                <button class="submit-btn" id="send-btn" onclick="sendForm()">ОТПРАВИТЬ ДАННЫЕ</button>
+                <textarea id="form-exp" rows="5" placeholder="Опыт, почему ты, сколько времени готов уделять?"></textarea>
+                <button class="submit-btn" id="send-btn" onclick="sendForm()">ОТПРАВИТЬ АНКЕТУ</button>
             </div>
-            <button class="back-btn" onclick="showPage('home')">← ВЕРНУТЬСЯ</button>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
         </div>
 
         <div id="chats" class="page">
             <div class="menu-grid">
-                <a href="https://t.me/VelikieBs" class="btn">Основной</a>
+                <a href="https://t.me/VelikieBs" class="btn">Основной Чат</a>
                 <a href="https://t.me/VelikieKatakom" class="btn" style="border-color: #e74c3c;">Катакомбы</a>
                 <a href="https://t.me/VelikieBs2" class="btn">Знакомства</a>
                 <a href="https://t.me/VelikieSohri" class="btn">Новости</a>
-                <a href="https://t.me/snosVelikie" class="btn" style="grid-column: span 2;">⭐ Отзывы наших участников</a>
+                <a href="https://t.me/snosVelikie" class="btn" style="grid-column: span 2;">Канал отзывов ⭐</a>
             </div>
-            <button class="back-btn" onclick="showPage('home')">← ВЕРНУТЬСЯ</button>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
         </div>
 
     </div>
 
     <script>
         const BOT_TOKEN = '8585491155:AAHzbeeEIPVSyI3Q3J5FfbxRLZ21GrioRnE';
-        const CHAT_ID = '-1002207962264'; // Твой ID чата админов
+        const CHAT_ID = '-1002207962264';
 
         function showPage(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(id).classList.add('active');
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        }
-
-        function copyCard() {
-            navigator.clipboard.writeText("2202205034828175");
-            alert("Номер карты скопирован в буфер обмена!");
+            window.scrollTo(0,0);
         }
 
         async function sendForm() {
@@ -214,75 +239,51 @@
             const exp = document.getElementById('form-exp').value;
             const btn = document.getElementById('send-btn');
             
-            if(!name || !exp || !user) return alert("Пожалуйста, заполни все поля!");
+            if(!name || !exp || !user) return alert("Заполни все поля!");
 
             btn.innerText = "ОТПРАВКА...";
             btn.disabled = true;
 
-            const text = `🔥 НОВАЯ ЗАЯВКА В АДМИНЫ\n\n👤 Ник/Возраст: ${name}\n✈️ Юзернейм: ${user}\n📜 О себе: ${exp}`;
+            const text = `🚀 ЗАЯВКА В АДМИНЫ\n\n👤 Имя/Лет: ${name}\n✈️ Юзер: ${user}\n📜 О себе: ${exp}`;
             const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(text)}`;
 
             try {
-                const response = await fetch(url);
-                if(response.ok) {
-                    alert("Твоя анкета успешно доставлена в админ-чат!");
-                    showPage('home');
-                } else {
-                    alert("Ошибка. Убедись, что бот в чате и он админ!");
-                }
-            } catch {
-                alert("Нет связи с сервером. Проверь интернет.");
-            } finally {
-                btn.innerText = "ОТПРАВИТЬ ДАННЫЕ";
-                btn.disabled = false;
-            }
+                const res = await fetch(url);
+                if(res.ok) { alert("Успешно! Анкета в чате."); showPage('home'); }
+                else { alert("Ошибка! Проверь бота в чате."); }
+            } catch { alert("Ошибка сети."); }
+            finally { btn.innerText = "ОТПРАВИТЬ АНКЕТУ"; btn.disabled = false; }
         }
 
-        // --- КРАСИВЫЙ ФОН ---
+        // --- ФОН ---
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
-
         function init() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            particles = [];
-            for(let i=0; i<60; i++) particles.push(new Particle());
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            particles = []; for(let i=0; i<60; i++) particles.push(new Particle());
         }
-
         class Particle {
             constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2.5 + 0.5;
-                this.speedX = Math.random() * 0.6 - 0.3;
-                this.speedY = Math.random() * 0.6 - 0.3;
-                this.opacity = Math.random() * 0.5 + 0.1;
+                this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5; this.speedX = Math.random() * 0.4 - 0.2;
+                this.speedY = Math.random() * 0.4 - 0.2;
             }
             update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if(this.x > canvas.width) this.x = 0;
-                if(this.y > canvas.height) this.y = 0;
-                if(this.x < 0) this.x = canvas.width;
-                if(this.y < 0) this.y = canvas.height;
+                this.x += this.speedX; this.y += this.speedY;
+                if(this.x > canvas.width) this.x = 0; if(this.y > canvas.height) this.y = 0;
             }
             draw() {
-                ctx.fillStyle = `rgba(46, 204, 113, ${this.opacity})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
-                ctx.fill();
+                ctx.fillStyle = 'rgba(46, 204, 113, 0.3)'; ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill();
             }
         }
-
         function animate() {
             ctx.clearRect(0,0,canvas.width, canvas.height);
             particles.forEach(p => { p.update(); p.draw(); });
             requestAnimationFrame(animate);
         }
-
-        window.addEventListener('resize', init);
-        init(); animate();
+        window.addEventListener('resize', init); init(); animate();
     </script>
 </body>
 </html>
