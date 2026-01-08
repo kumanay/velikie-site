@@ -39,7 +39,6 @@
             cursor: pointer; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;
             font-size: 1.2rem; transition: 0.3s; z-index: 10;
         }
-        .music-ctrl:hover { background: var(--primary); color: #000; }
 
         .card {
             background: var(--card-bg);
@@ -77,7 +76,7 @@
         }
         .submit-btn {
             width: 100%; background: var(--primary); color: black; border: none; 
-            padding: 16px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1.1rem;
+            padding: 16px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1.1rem; text-decoration: none; display: block; text-align: center;
         }
 
         .page { display: none; animation: fadeIn 0.4s ease forwards; }
@@ -93,7 +92,7 @@
 <body>
 
     <canvas id="canvas"></canvas>
-    <audio id="bg-music" loop src="Https://youtu.be/O5p2ZX7UU9w?si=-b8qiyxu6ekSEFQS"></audio>
+    <audio id="bg-music" loop src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Kevin_MacLeod/Impact/Kevin_MacLeod_-_Impact_Andante.mp3"></audio>
 
     <div class="container">
         
@@ -127,17 +126,16 @@
         <div id="support" class="page">
             <div class="card">
                 <h2 style="color: var(--primary); text-align: center;">📬 КАНЦЕЛЯРИЯ</h2>
-                <p style="font-size: 0.9rem; text-align: center; opacity: 0.7; margin-bottom: 10px;">Жалобы, идеи и предложения</p>
                 <select id="sup-type">
                     <option value="💡 ИДЕЯ">💡 Предложить идею</option>
                     <option value="🔴 ЖАЛОБА">🔴 Подать жалобу</option>
                     <option value="⚙️ ТЕХ">⚙️ Тех. вопрос</option>
                 </select>
                 <input type="text" id="sup-tg" placeholder="Твой @username">
-                <textarea id="sup-msg" rows="5" placeholder="Опишите суть обращения максимально подробно..."></textarea>
+                <textarea id="sup-msg" rows="5" placeholder="Опишите суть обращения..."></textarea>
                 <button class="submit-btn" id="sup-btn" onclick="sendSupport()">ОТПРАВИТЬ В ШТАБ</button>
             </div>
-            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
         </div>
 
         <div id="rules" class="page">
@@ -145,23 +143,22 @@
                 <h2 style="color: var(--primary); text-align:center;">🌋 ВЕЛИКИЕ ЗАКОНЫ</h2>
                 
                 <span class="rules-cat">🚫 ЗАПРЕЩЕНО:</span>
-                • <b>СПАМ</b> (лесенки, повторы, гиф, видео, флуд командами) — мут 15 мин-1ч<br>
-                • <b>РЕКЛАМА</b> (любая) без согласования — мут/бан<br>
+                • <b>СПАМ/ФЛУД</b> (лесенки, повторы, гиф, видео) — мут 15 мин-1ч<br>
+                • <b>РЕКЛАМА</b> (любая) без согласования — БАН<br>
                 • Замещение владельца без разрешения — мут/бан<br>
-                • Контент 18+ 16+ (<b>разрешён после 22:00 МСК</b>) — мут-пред<br>
+                • Контент 18+/16+ (<b>разрешён только после 22:00 МСК</b>)<br>
                 
                 <span class="rules-cat">📮 ТЕМЫ-ТАБУ:</span>
-                • Оскорбления нации, религия, политика, дипломатия — мут 10–35 мин<br>
-                • Обсуждение наркотиков на серьёзной основе — мут 25 мин–24 ч / пред / бан<br>
-                • Треш-контент — Мут/Пред / бан<br>
-                • <b>Пдф (пидофилия)</b> — бан без обсуждений.<br>
+                • Оскорбления нации, религия, политика — мут 10–35 мин<br>
+                • Обсуждение наркотиков — мут 25 мин–24 ч / бан<br>
+                • <b>Пдф (пидофилия)</b> — бан навсегда.<br>
 
                 <span class="rules-cat">📍 ПОРЯДОК:</span>
-                • Конфликты, провокации, оскорбления — мут 15 мин – 1 ч<br>
-                • Обход наказания — ×2 к сроку мута / бан<br>
+                • Конфликты и провокации — мут 15 мин – 1 ч<br>
+                • Обход наказания — ×2 к сроку или бан<br>
                 • <b>4 предупреждения</b> — автоматический бан.
             </div>
-            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
         </div>
 
         <div id="donate" class="page">
@@ -182,50 +179,49 @@
                     <ul class="don-list">
                         <li>Префикс: Высший Спонсор</li>
                         <li>Доступ в секретный чат админов</li>
-                        <li>Прямая возможность подать на модератора</li>
+                        <li>Возможность стать модератором</li>
                     </ul>
                 </div>
 
-                <div class="don-item">
+                <div class="don-item" style="border:none;">
                     <div class="don-title">💎 Инвестор <span style="font-size:0.9rem; opacity:0.7;">(5000 ₽ / 1 год)</span></div>
                     <ul class="don-list">
                         <li>Полный иммунитет (банит только Владелец)</li>
-                        <li>Управление трансляциями и сообщениями</li>
-                        <li>Реклама своих ресурсов в закрепе</li>
+                        <li>Управление трансляциями и закрепами</li>
+                        <li>Реклама своих ресурсов</li>
                     </ul>
                 </div>
 
-                <div style="background: rgba(0,0,0,0.4); padding: 20px; border-radius: 15px; text-align: center; border: 1px dashed var(--gold);">
+                <div style="background: rgba(0,0,0,0.4); padding: 20px; border-radius: 15px; text-align: center; border: 1px dashed var(--gold); margin-bottom: 20px;">
                     <p>Карта Сбербанка:</p>
-                    <h2 onclick="navigator.clipboard.writeText('2202205034828175'); alert('Номер скопирован!')" style="cursor: pointer; color: var(--gold); margin: 10px 0;">2202 2050 3482 8175</h2>
-                    <small>(Нажми на номер для копирования)</small>
+                    <b onclick="navigator.clipboard.writeText('2202205034828175'); alert('Скопировано!')" style="cursor: pointer; color: var(--gold); font-size: 1.4rem;">2202 2050 3482 8175</b>
                 </div>
+
+                <a href="https://t.me/KumaWelikiy" class="submit-btn" style="background: var(--gold);">ОТПРАВИТЬ ЧЕК В ЛС</a>
             </div>
-            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
         </div>
 
         <div id="admin" class="page">
             <div class="card">
                 <h2 style="text-align: center;">📝 СТАТЬ АДМИНОМ</h2>
                 <input type="text" id="adm-name" placeholder="Ник и ваш возраст">
-                <input type="text" id="adm-tg" placeholder="Ваш @username в Telegram">
-                <textarea id="adm-exp" rows="5" placeholder="Ваш опыт администрирования, сколько времени готовы уделять чату?"></textarea>
+                <input type="text" id="adm-tg" placeholder="Ваш @username">
+                <textarea id="adm-exp" rows="5" placeholder="Ваш опыт..."></textarea>
                 <button class="submit-btn" onclick="sendAdminForm()">ОТПРАВИТЬ АНКЕТУ</button>
             </div>
-            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
         </div>
 
         <div id="chats" class="page">
             <div class="menu-grid">
-                <a href="https://t.me/VelikieBs" class="btn">Основной Чат</a>
-                <a href="https://t.me/VelikieKatakom" class="btn" style="border-color: #e74c3c;">Катакомбы</a>
+                <a href="https://t.me/VelikieBs" class="btn">Основной</a>
+                <a href="https://t.me/VelikieKatakom" class="btn">Катакомбы</a>
                 <a href="https://t.me/VelikieBs2" class="btn">Знакомства</a>
-                <a href="https://t.me/VelikieSohri" class="btn">Новости</a>
-                <a href="https://t.me/snosVelikie" class="btn" style="grid-column: span 2;">Канал Отзывов ⭐</a>
+                <a href="https://t.me/snosVelikie" class="btn" style="grid-column: span 2;">Отзывы ⭐</a>
             </div>
-            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
         </div>
-
     </div>
 
     <script>
@@ -247,35 +243,26 @@
         }
 
         async function sendSupport() {
-            const now = Date.now();
-            if(now - lastSend < 300000) return alert("Подождите 5 минут перед следующим обращением.");
+            if(Date.now() - lastSend < 300000) return alert("Подождите 5 минут.");
             const type = document.getElementById('sup-type').value;
             const user = document.getElementById('sup-tg').value;
             const msg = document.getElementById('sup-msg').value;
-            if(!user || !msg) return alert("Пожалуйста, заполните все поля.");
-            
+            if(!user || !msg) return alert("Заполните поля.");
             const text = `📬 КАНЦЕЛЯРИЯ\n📌 Тип: ${type}\n✈️ Юзер: ${user}\n💬 Сообщение: ${msg}`;
             const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(text)}`;
-            
-            try {
-                const res = await fetch(url);
-                if(res.ok) { alert("Ваше сообщение доставлено в штаб!"); lastSend = now; showPage('home'); }
-            } catch { alert("Ошибка при отправке."); }
+            const res = await fetch(url);
+            if(res.ok) { alert("Отправлено!"); lastSend = Date.now(); showPage('home'); }
         }
 
         async function sendAdminForm() {
             const name = document.getElementById('adm-name').value;
             const user = document.getElementById('adm-tg').value;
             const exp = document.getElementById('adm-exp').value;
-            if(!name || !user || !exp) return alert("Заполните все поля анкеты.");
-
-            const text = `📝 ЗАЯВКА В АДМИНЫ\n👤 Имя/Возраст: ${name}\n✈️ Юзер: ${user}\n📜 Опыт: ${exp}`;
+            if(!name || !user || !exp) return alert("Заполните анкету полностью.");
+            const text = `📝 ЗАЯВКА В АДМИНЫ\n👤 Имя: ${name}\n✈️ Юзер: ${user}\n📜 Опыт: ${exp}`;
             const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(text)}`;
-            
-            try {
-                const res = await fetch(url);
-                if(res.ok) { alert("Анкета успешно отправлена!"); showPage('home'); }
-            } catch { alert("Ошибка отправки."); }
+            const res = await fetch(url);
+            if(res.ok) { alert("Анкета отправлена!"); showPage('home'); }
         }
 
         const canvas = document.getElementById('canvas');
@@ -288,7 +275,7 @@
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5; this.speedX = Math.random() * 0.4 - 0.2; this.speedY = Math.random() * 0.4 - 0.2;
+                this.size = Math.random() * 2; this.speedX = Math.random() * 0.4 - 0.2; this.speedY = Math.random() * 0.4 - 0.2;
             }
             update() {
                 this.x += this.speedX; this.y += this.speedY;
