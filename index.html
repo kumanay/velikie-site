@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ВЕЛИКИЕ | Sapphire Edition 5.0</title>
+    <title>ВЕЛИКИЕ | V6.1 Elite</title>
     <style>
         :root {
             --bg: #030803;
@@ -48,17 +48,24 @@
             backdrop-filter: blur(15px); box-shadow: 0 15px 35px rgba(0,0,0,0.6);
         }
 
-        /* ЗАЛ СЛАВЫ (ДИНАМИЧЕСКИЙ С ФИКСИРОВАННЫМИ ФОТО) */
+        /* ГРИД УЧАСТНИКОВ */
         .hall-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 15px; }
         .member { text-align: center; padding: 10px; transition: 0.3s; }
-        .avatar-wrap {
-            position: relative; width: 75px; height: 75px; margin: 0 auto 10px;
-        }
+        .avatar-wrap { position: relative; width: 75px; height: 75px; margin: 0 auto 10px; }
+        
+        /* Обычная рамка (Актив) */
         .avatar-wrap::after {
             content: ''; position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px;
-            border-radius: 50%; border: 2px solid var(--gold);
-            animation: rotate 8s linear infinite; box-shadow: 0 0 10px var(--gold-glow);
+            border-radius: 50%; border: 2px solid var(--primary);
         }
+        
+        /* Золотая рамка (Донат) */
+        .gold-wrap::after {
+            border-color: var(--gold) !important;
+            animation: rotate 8s linear infinite;
+            box-shadow: 0 0 10px var(--gold-glow);
+        }
+
         .avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #111; border: 2px solid transparent; }
         .member b { display: block; color: #fff; font-size: 0.85rem; margin-top: 5px; }
         .member span { display: block; color: var(--gold); font-size: 0.65rem; text-transform: uppercase; }
@@ -71,17 +78,14 @@
             display: flex; flex-direction: column; align-items: center; gap: 8px; text-decoration: none;
         }
         .btn:hover { background: var(--primary); color: #000; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3); }
-        .btn-main { grid-column: span 2; background: var(--gold); color: #000; font-size: 1.2rem; border: none; }
-        .btn-main:hover { background: #fff; box-shadow: 0 0 20px #fff; }
+        
+        .btn-gold { border-color: var(--gold); color: var(--gold); font-size: 1.2rem; }
+        .btn-gold:hover { background: var(--gold); color: #000; box-shadow: 0 0 20px var(--gold-glow); }
 
+        /* КАНЦЕЛЯРИЯ И ПРАВИЛА (КАК В 5.1) */
         .full-rules { text-align: left; font-size: 1rem; line-height: 1.5; }
         .rules-cat { color: var(--primary); font-weight: bold; margin-top: 15px; display: block; border-bottom: 1px solid #2ecc7133; padding-bottom: 3px; margin-bottom: 8px;}
-
-        .don-item { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #222; }
-        .don-title { color: var(--gold); font-size: 1.2rem; font-weight: bold; }
-        .don-list { margin-top: 8px; list-style: none; font-size: 0.9rem; opacity: 0.9; }
-        .don-list li::before { content: "🔹 "; color: var(--gold); }
-
+        
         select, input, textarea {
             width: 100%; padding: 14px; margin: 10px 0;
             background: rgba(0,0,0,0.6); border: 1px solid var(--primary);
@@ -118,98 +122,78 @@
                 <div class="music-ctrl" onclick="toggleMusic()" id="mus-icon">🔇</div>
                 <div class="logo-img">👑</div>
                 <h1>ВЕЛИКИЕ</h1>
-                <p style="opacity: 0.6; letter-spacing: 2px;">COMMUNITY HUB</p>
             </header>
 
             <div class="card">
-                <h3 style="color: var(--gold); text-align: center; text-transform: uppercase; letter-spacing: 2px;">🏆 Зал Славы</h3>
-                <div class="hall-grid" id="hall-of-fame">
-                    <p style="grid-column: span 3; text-align:center; opacity:0.5;">Свитки загружаются...</p>
+                <h3 style="color: var(--primary); text-align: center; text-transform: uppercase; letter-spacing: 2px;">🔥 Актив Месяца</h3>
+                <div class="hall-grid" id="active-list">
+                    <p style="grid-column: span 3; text-align:center; opacity:0.5;">Загрузка штаба...</p>
                 </div>
             </div>
 
             <div class="menu-grid">
-                <a href="https://t.me/VelikieBs" class="btn btn-main">🚀 ВОЙТИ В ЧАТ</a>
+                <div class="btn btn-gold" onclick="showPage('olimp')" style="grid-column: span 2;">💎 ОЛИМП ДОНАТЕРОВ</div>
+                <a href="https://t.me/VelikieBs" class="btn" style="grid-column: span 2; background: var(--primary); color: #000; font-size: 1.2rem;">🚀 ВОЙТИ В ЧАТ</a>
                 <div class="btn" onclick="showPage('rules')">📜 Законы</div>
-                <div class="btn" onclick="showPage('donate')">💎 Донаты</div>
-                <div class="btn" onclick="showPage('admin')">📝 Анкета</div>
+                <div class="btn" onclick="showPage('donate')">💰 Донаты</div>
                 <div class="btn" onclick="showPage('support')">📬 Канцелярия</div>
-                <div class="btn" onclick="showPage('chats')" style="grid-column: span 2;">🔗 Наши Ресурсы</div>
+                <div class="btn" onclick="showPage('admin')">📝 Анкета</div>
             </div>
         </div>
 
-        <div id="support" class="page">
-            <div class="card">
-                <h2 style="color: var(--primary); text-align: center;">📬 КАНЦЕЛЯРИЯ</h2>
-                <select id="sup-type">
-                    <option value="💡 ИДЕЯ">💡 Предложить идею</option>
-                    <option value="🔴 ЖАЛОБА">🔴 Подать жалобу</option>
-                    <option value="⚙️ ТЕХ">⚙️ Тех. вопрос</option>
-                </select>
-                <input type="text" id="sup-tg" placeholder="Твой @username">
-                <textarea id="sup-msg" rows="5" placeholder="Опишите суть обращения максимально подробно..."></textarea>
-                <button class="submit-btn" id="sup-btn" onclick="sendSupport()">ОТПРАВИТЬ В ШТАБ</button>
+        <div id="olimp" class="page">
+            <div class="card" style="border-color: var(--gold); background: rgba(20, 15, 5, 0.95);">
+                <h2 style="color: var(--gold); text-align: center; letter-spacing: 3px;">💎 ОЛИМП</h2>
+                <p style="text-align: center; font-size: 0.9rem; margin-bottom: 20px;">Наши почетные спонсоры и меценаты</p>
+                <div class="hall-grid" id="donat-list">
+                    </div>
             </div>
-            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
+            <button class="back-btn" onclick="showPage('home')" style="border-color: var(--gold); color: var(--gold);">← НА ГЛАВНУЮ</button>
         </div>
 
         <div id="rules" class="page">
             <div class="card full-rules">
                 <h2 style="color: var(--primary); text-align:center;">🌋 ВЕЛИКИЕ ЗАКОНЫ</h2>
                 <span class="rules-cat">🚫 ЗАПРЕЩЕНО:</span>
-                • <b>СПАМ/ФЛУД</b> (лесенки, повторы, гиф, видео) — мут 15 мин-1ч<br>
-                • <b>РЕКЛАМА</b> (любая) без согласования — БАН<br>
-                • Замещение владельца без разрешения — мут/бан<br>
-                • Контент 18+/16+ (<b>разрешён после 22:00 МСК</b>)<br>
-                <span class="rules-cat">📮 ТЕМЫ-ТАБУ:</span>
-                • Оскорбления нации, религия, политика — мут 10–35 мин<br>
-                • Обсуждение наркотиков на серьёзной основе — мут 25 мин–24 ч / бан<br>
-                • Треш-контент — Мут/Пред / бан<br>
-                • <b>Пдф (пидофилия)</b> — бан навсегда.<br>
+                • <b>СПАМ/ФЛУД</b> (лесенки, повторы, гиф) — мут<br>
+                • <b>РЕКЛАМА</b> — БАН<br>
                 <span class="rules-cat">📍 ПОРЯДОК:</span>
-                • Конфликты и провокации — мут 15 мин – 1 ч<br>
-                • Обход наказания — ×2 к сроку или бан<br>
                 • <b>4 предупреждения</b> — автоматический бан.
             </div>
-            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
         </div>
 
         <div id="donate" class="page">
             <div class="card">
-                <h2 style="color: var(--gold); text-align:center; margin-bottom:20px;">💎 ПОДДЕРЖКА ПРОЕКТА</h2>
-                <div class="don-item"><div class="don-title">💛 Спонсор (200 ₽)</div><ul class="don-list"><li>Префикс в чате</li><li>Приоритет в наказаниях</li></ul></div>
-                <div class="don-item"><div class="don-title">💛 Спонсор+ (400 ₽)</div><ul class="don-list"><li>Секретный чат админов</li><li>Шанс на модерку</li></ul></div>
-                <div class="don-item" style="border:none;"><div class="don-title">💎 Инвестор (5000 ₽)</div><ul class="don-list"><li>Полный иммунитет</li><li>Реклама в закрепе</li></ul></div>
-                <div style="background: rgba(0,0,0,0.4); padding: 15px; border-radius: 15px; text-align: center; border: 1px dashed var(--gold); margin-bottom: 20px;">
-                    <p>Карта Сбербанка:</p>
-                    <b onclick="navigator.clipboard.writeText('2202205034828175'); alert('Скопировано!')" style="cursor: pointer; color: var(--gold); font-size: 1.2rem;">2202 2050 3482 8175</b>
-                </div>
-                <a href="https://t.me/KumaWelikiy" class="submit-btn" style="background: var(--gold);">ОТПРАВИТЬ ЧЕК В ЛС</a>
+                <h2 style="color: var(--gold); text-align:center;">💎 ПОДДЕРЖКА</h2>
+                <p style="text-align:center; margin: 20px 0;">Карта Сбербанка:<br>
+                <b style="color: var(--gold); font-size: 1.2rem;">2202 2050 3482 8175</b></p>
+                <a href="https://t.me/KumaWelikiy" class="submit-btn" style="background: var(--gold);">ОТПРАВИТЬ ЧЕК</a>
             </div>
-            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
         </div>
 
-        <div id="chats" class="page">
-            <div class="menu-grid">
-                <a href="https://t.me/VelikieBs" class="btn">Основной Чат</a>
-                <a href="https://t.me/VelikieKatakom" class="btn" style="border-color: #e74c3c;">Катакомбы</a>
-                <a href="https://t.me/VelikieBs2" class="btn">Знакомства</a>
-                <a href="https://t.me/VelikieSohri" class="btn">Великие Сохры</a>
-                <a href="https://t.me/snosVelikie" class="btn" style="grid-column: span 2;">Канал Отзывов ⭐</a>
+        <div id="support" class="page">
+            <div class="card">
+                <h2 style="color: var(--primary); text-align: center;">📬 КАНЦЕЛЯРИЯ</h2>
+                <select id="sup-type"><option value="💡 ИДЕЯ">💡 Предложить идею</option></select>
+                <input type="text" id="sup-tg" placeholder="Твой @username">
+                <textarea id="sup-msg" rows="5" placeholder="Суть обращения..."></textarea>
+                <button class="submit-btn" onclick="sendSupport()">ОТПРАВИТЬ</button>
             </div>
-            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
         </div>
 
         <div id="admin" class="page">
             <div class="card">
-                <h2 style="text-align: center;">📝 СТАТЬ АДМИНОМ</h2>
-                <input type="text" id="adm-name" placeholder="Ник и ваш возраст">
-                <input type="text" id="adm-tg" placeholder="Ваш @username">
-                <textarea id="adm-exp" rows="5" placeholder="Ваш опыт..."></textarea>
-                <button class="submit-btn" onclick="sendAdminForm()">ОТПРАВИТЬ АНКЕТУ</button>
+                <h2 style="text-align: center;">📝 АНКЕТА</h2>
+                <input type="text" id="adm-tg" placeholder="Твой @username">
+                <textarea id="adm-exp" rows="5" placeholder="Твой опыт..."></textarea>
+                <button class="submit-btn" onclick="sendAdminForm()">ОТПРАВИТЬ</button>
             </div>
-            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
         </div>
+
     </div>
 
     <script>
@@ -218,34 +202,43 @@
         const SPREADSHEET_ID = '1T9OYL6gd_73llbvdg0zUw43hF0GauaauYF1DYWqWKNs';
         const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv`;
 
-        async function loadHallOfFame() {
+        async function loadData() {
             try {
                 const response = await fetch(SHEET_URL);
                 const data = await response.text();
                 const rows = data.split('\n');
-                const grid = document.getElementById('hall-of-fame');
-                grid.innerHTML = ''; 
+                
+                const activeList = document.getElementById('active-list');
+                const donatList = document.getElementById('donat-list');
+                
+                activeList.innerHTML = '';
+                donatList.innerHTML = '';
 
                 rows.forEach(row => {
-                    const columns = row.split(',').map(c => c.replace(/"/g, '').trim());
-                    if (columns.length >= 3 && columns[0] !== "") {
-                        // ФИКС КАРТИНКИ ЧЕРЕЗ ПРОКСИ WSRV (для РФ и обхода блокировок)
-                        const safePhoto = `https://wsrv.nl/?url=${encodeURIComponent(columns[2])}&w=150&h=150&fit=cover&mask=circle&errorredirect=https://cdn-icons-png.flaticon.com/512/1067/1067346.png`;
-                        
-                        grid.innerHTML += `
+                    const col = row.split(',').map(c => c.replace(/"/g, '').trim());
+                    if (col.length >= 4 && col[0] !== "") {
+                        const name = col[0];
+                        const status = col[1];
+                        const photo = `https://wsrv.nl/?url=${encodeURIComponent(col[2])}&w=150&h=150&fit=cover&mask=circle`;
+                        const type = col[3].toLowerCase();
+
+                        const html = `
                             <div class="member">
-                                <div class="avatar-wrap"><img src="${safePhoto}" class="avatar" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1067/1067346.png'"></div>
-                                <b>${columns[0]}</b>
-                                <span>${columns[1]}</span>
+                                <div class="avatar-wrap ${type === 'донат' ? 'gold-wrap' : ''}">
+                                    <img src="${photo}" class="avatar" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1067/1067346.png'">
+                                </div>
+                                <b style="color: ${type === 'донат' ? '#f1c40f' : '#fff'}">${name}</b>
+                                <span>${status}</span>
                             </div>`;
+
+                        if (type === 'актив') activeList.innerHTML += html;
+                        else if (type === 'донат') donatList.innerHTML += html;
                     }
                 });
-            } catch (e) {
-                document.getElementById('hall-of-fame').innerHTML = '<p>Ошибка таблиц</p>';
-            }
+            } catch (e) { console.log("Ошибка данных"); }
         }
 
-        loadHallOfFame();
+        loadData();
 
         function showPage(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -272,6 +265,7 @@
             alert("Анкета ушла!"); showPage('home');
         }
 
+        // Анимация фона (ОСТАВЛЕНА)
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         let clouds = [];
