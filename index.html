@@ -3,158 +3,342 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ВЕЛИКИЕ — Империя Порядка</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Oswald:wght@300;500&display=swap" rel="stylesheet">
+    <title>ВЕЛИКИЕ | V5.8 Final Bot Integration</title>
     <style>
         :root {
-            --gold: #d4af37;
-            --black: #0a0a0a;
-            --deep-gray: #1a1a1a;
-            --sapphire: #0f52ba;
+            --bg: #030803;
+            --card-bg: rgba(7, 22, 12, 0.95);
+            --primary: #2ecc71;
+            --gold: #f1c40f;
+            --gold-glow: rgba(241, 196, 15, 0.4);
+            --text: #e0f0e0;
+            --input-bg: rgba(0, 0, 0, 0.7);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--black); color: white; font-family: 'Oswald', sans-serif; line-height: 1.6; }
-
-        header {
-            height: 60vh;
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?q=80&w=2070') center/cover;
-            border-bottom: 3px solid var(--gold);
         }
 
-        h1 { font-family: 'Cinzel', serif; font-size: 4rem; color: var(--gold); letter-spacing: 8px; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+        #canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; filter: blur(50px); opacity: 0.7; }
+        .container { width: 100%; max-width: 650px; padding: 20px; z-index: 1; }
 
-        /* БЛОК ПРАВИЛ */
-        .laws { background: #111; border: 1px solid var(--gold); padding: 30px; margin-bottom: 50px; }
-        .laws h2 { font-family: 'Cinzel', serif; color: var(--gold); text-align: center; margin-bottom: 20px; }
-        .law-item { margin-bottom: 15px; padding-left: 20px; border-left: 2px solid var(--gold); }
-        .law-item b { color: var(--gold); }
+        header { text-align: center; padding: 35px 0; position: relative; }
+        .logo-img { font-size: 4.5rem; filter: drop-shadow(0 0 20px var(--gold)); animation: pulse 3s infinite; }
+        h1 { font-size: 2.5rem; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; margin: 10px 0; }
 
-        /* КАРТОЧКИ ДОНАТА */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
-        .card { background: var(--deep-gray); border: 1px solid #333; padding: 25px; transition: 0.3s; }
-        .card:hover { border-color: var(--gold); transform: translateY(-5px); }
-        .card h3 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 1.8rem; }
-        .card ul { list-style: none; margin: 15px 0; font-size: 0.9rem; color: #ccc; }
-        .card ul li::before { content: "• "; color: var(--gold); }
-        .price-tag { font-size: 1.5rem; font-weight: bold; margin: 15px 0; display: block; }
+        .music-ctrl {
+            position: absolute; top: 10px; right: 10px;
+            background: rgba(241, 196, 15, 0.1); border: 1px solid var(--gold);
+            color: var(--gold); padding: 8px; border-radius: 50%;
+            cursor: pointer; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; transition: 0.3s; z-index: 100;
+        }
 
-        /* КНОПКИ */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(46, 204, 113, 0.2);
+            padding: 25px; border-radius: 20px; margin-bottom: 20px;
+            backdrop-filter: blur(15px); box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+        }
+
+        /* ЗАЛ СЛАВЫ */
+        .hall-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 15px; }
+        .member { text-align: center; padding: 10px; }
+        .avatar-wrap { position: relative; width: 75px; height: 75px; margin: 0 auto 10px; }
+        .avatar-wrap::after {
+            content: ''; position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px;
+            border-radius: 50%; border: 2px solid var(--gold);
+            animation: rotate 8s linear infinite; box-shadow: 0 0 10px var(--gold-glow);
+        }
+        .avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #111; }
+        .member b { display: block; color: #fff; font-size: 0.85rem; margin-top: 5px; }
+        .member span { display: block; color: var(--gold); font-size: 0.65rem; text-transform: uppercase; }
+
+        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            border: 2px solid var(--gold);
-            color: var(--gold);
-            text-decoration: none;
-            text-transform: uppercase;
-            font-weight: bold;
-            margin-top: 10px;
-            transition: 0.3s;
-            background: transparent;
+            background: rgba(255,255,255,0.05); border: 1px solid var(--primary);
+            color: white; padding: 18px; border-radius: 12px; cursor: pointer;
+            text-align: center; transition: 0.3s; font-weight: bold;
+            display: flex; flex-direction: column; align-items: center; gap: 8px; text-decoration: none;
         }
-        .btn:hover { background: var(--gold); color: black; }
-        .btn-stars { border-color: #5bc0de; color: #5bc0de; }
-        .btn-stars:hover { background: #5bc0de; color: white; }
+        .btn:hover { background: var(--primary); color: #000; transform: translateY(-3px); }
+        .btn-main { grid-column: span 2; background: var(--gold); color: #000; font-size: 1.2rem; border: none; }
 
-        /* КАНЦЕЛЯРИЯ */
-        .chancery { text-align: center; background: #111; padding: 40px; margin-top: 50px; border-top: 1px solid #333; }
-        .chancery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px; }
+        .full-rules { text-align: left; font-size: 0.95rem; line-height: 1.5; }
+        .rules-cat { color: var(--gold); font-weight: bold; margin-top: 18px; display: block; border-bottom: 1px solid rgba(241,196,15,0.3); padding-bottom: 3px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;}
+        .rule-item { margin-bottom: 8px; padding-left: 10px; border-left: 2px solid var(--primary); }
 
-        .member-list { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 20px; }
-        .member { background: #1a1a1a; padding: 5px 15px; border-left: 3px solid var(--sapphire); }
+        .don-card { margin-bottom: 25px; }
+        .don-header { color: var(--gold); font-size: 1.2rem; font-weight: bold; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #333; padding-bottom: 5px;}
+        .don-list { list-style: none; padding-left: 5px; }
+        .don-list li { margin-bottom: 7px; font-size: 0.9rem; opacity: 0.9; display: flex; align-items: flex-start; gap: 8px; }
+        .don-list li::before { content: "✔"; color: var(--gold); font-weight: bold; }
 
-        footer { text-align: center; padding: 30px; color: #555; font-size: 0.8rem; }
+        select, input, textarea {
+            width: 100%; padding: 16px; margin: 12px 0;
+            background: var(--input-bg); 
+            border: 1px solid #444;
+            border-left: 3px solid var(--primary);
+            color: white; border-radius: 12px; font-size: 1.05rem;
+            outline: none; transition: 0.3s;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .submit-btn {
+            width: 100%; background: var(--primary); color: black; border: none; 
+            padding: 18px; border-radius: 12px; font-weight: bold; cursor: pointer; 
+            font-size: 1.1rem; text-decoration: none; display: block; text-align: center;
+            margin-top: 10px; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .submit-btn:hover { transform: scale(1.02); box-shadow: 0 0 20px rgba(46, 204, 113, 0.4); }
+
+        .back-btn {
+            display: block; width: 100%; margin-top: 25px; padding: 15px;
+            border: 2px solid var(--primary); background: none; color: var(--primary); border-radius: 12px; font-weight: bold; cursor: pointer;
+        }
+
+        .page { display: none; animation: fadeIn 0.4s ease forwards; }
+        .page.active { display: block; }
+
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>ВЕЛИКИЕ</h1>
-    <p>Порядок. Единство. Дисциплина.</p>
-</header>
+    <canvas id="canvas"></canvas>
+    <audio id="bg-music" loop preload="auto">
+        <source src="https://github.com/ecemgo/mini-samples-great-tricks/raw/main/song-list/Kordhell-Murder-In-My-Mind.mp3" type="audio/mpeg">
+    </audio>
 
-<div class="container">
-    
-    <section class="laws">
-        <h2>СВОД ЗАКОНОВ ИМПЕРИИ</h2>
-        <div class="law-item"><b>1. ЕДИНСТВО:</b> Запрещены любые формы разжигания конфликтов внутри проекта.</div>
-        <div class="law-item"><b>2. ПОРЯДОК:</b> Спам, флуд и неадекватное поведение караются немедленно.</div>
-        <div class="law-item"><b>3. УВАЖЕНИЕ:</b> Оскорбление администрации — это вызов всей Империи.</div>
-        <div class="law-item"><b>4. ТЕРРИТОРИЯ:</b> Реклама сторонних ресурсов без согласия Высшего Совета запрещена.</div>
-    </section>
-
-    <h2 style="text-align: center; font-family: 'Cinzel'; color: var(--gold); margin-bottom: 30px;">ПРИВИЛЕГИИ</h2>
-    <div class="grid">
+    <div class="container">
         
-        <div class="card">
-            <h3>СПОНСОР</h3>
-            <ul>
-                <li>Префикс [СПОНСОР] в чате</li>
-                <li>Иммунитет к медленному режиму</li>
-                <li>Доступ к эксклюзивным опросам</li>
-                <li>Поддержка развития проекта</li>
-            </ul>
-            <span class="price-tag">300 ₽ / 200 ⭐</span>
-            <a href="https://t.me/VelikieDonateBot?start=buy_sponsor" class="btn btn-stars">Оплатить Stars</a>
-            <a href="https://t.me/VelikieDonateBot" class="btn">Картой</a>
+        <div id="home" class="page active">
+            <header>
+                <div class="music-ctrl" onclick="toggleMusic()" id="mus-icon">🔇</div>
+                <div class="logo-img">👑</div>
+                <h1>ВЕЛИКИЕ</h1>
+                <p style="opacity: 0.6; letter-spacing: 2px;">COMMUNITY HUB</p>
+            </header>
+
+            <div class="card">
+                <h3 style="color: var(--gold); text-align: center; text-transform: uppercase; letter-spacing: 2px;">🏆 Зал Славы</h3>
+                <div class="hall-grid" id="hall-of-fame">
+                    <p style="grid-column: span 3; text-align:center; opacity:0.5;">Свитки загружаются...</p>
+                </div>
+            </div>
+
+            <div class="menu-grid">
+                <a href="https://t.me/VelikieBs" class="btn btn-main">🚀 ВОЙТИ В ЧАТ</a>
+                <div class="btn" onclick="showPage('rules')">📜 Законы</div>
+                <div class="btn" onclick="showPage('donate')">💎 Донаты</div>
+                <div class="btn" onclick="showPage('admin')">📝 Анкета</div>
+                <div class="btn" onclick="showPage('support')">📬 Канцелярия</div>
+                <div class="btn" onclick="showPage('chats')" style="grid-column: span 2;">🔗 Наши Ресурсы</div>
+            </div>
         </div>
 
-        <div class="card">
-            <h3>СПОНСОР+</h3>
-            <ul>
-                <li>Золотой префикс [ВЕЛИКИЙ]</li>
-                <li>Возможность предлагать законы</li>
-                <li>Личный канал для связи с админами</li>
-                <li>Иммунитет к варнам (1 уровень)</li>
-            </ul>
-            <span class="price-tag">600 ₽ / 400 ⭐</span>
-            <a href="https://t.me/VelikieDonateBot?start=buy_sponsor_plus" class="btn btn-stars">Оплатить Stars</a>
-            <a href="https://t.me/VelikieDonateBot" class="btn">Картой</a>
+        <div id="rules" class="page">
+            <div class="card full-rules">
+                <h2 style="color: var(--gold); text-align:center; text-transform: uppercase;">🌋 ВЕЛИКИЕ ЗАКОНЫ</h2>
+                
+                <span class="rules-cat">🚫 ЗАПРЕЩЕНО:</span>
+                <div class="rule-item"><b>СПАМ:</b> лесенки, повторяющиеся символы, гифки, видео, флуд командами и т.д. (Мут 15 мин-1ч)</div>
+                <div class="rule-item"><b>РЕКЛАМА:</b> любая реклама без согласования с владельцем (Мут-Бан)</div>
+                <div class="rule-item"><b>ЗАМЕЩЕНИЕ:</b> замещение владельца без разрешения (Мут-Бан)</div>
+                <div class="rule-item"><b>КОНТЕНТ 18+/16+:</b> разрешён после 22:00 МСК. Запрещены всегда: детский контент, зоофилия, насилие, резня (Мут-Пред)</div>
+
+                <span class="rules-cat">📮 ТЕМЫ-ТАБУ:</span>
+                <div class="rule-item">Оскорбления нации, религия, политика, дипломатия (Мут 10–35 мин)</div>
+                <div class="rule-item">Обсуждение наркотиков на серьезной основе (Мут 25 мин–24 ч / Пред / Бан)</div>
+                <div class="rule-item">Треш-контент (Мут / Пред / Бан)</div>
+
+                <span class="rules-cat">🔞 ПДФ (ПИДОФИЛИЯ):</span>
+                <div class="rule-item">Наказываются склонности к пдф (Пред-Бан)</div>
+                <div class="rule-item">Темы, относящиеся к пдф по факту (Мут / Пред)</div>
+                <div class="rule-item">Если вам сделали замечание об удалении контента по этой теме — удалите его. Мы заботимся о комфорте участников.</div>
+
+                <span class="rules-cat">📍 ПОРЯДОК И НАРУШЕНИЯ:</span>
+                <div class="rule-item">Конфликты, провокации, оскорбления, ссоры (Мут 15 мин – 1 ч / Пред / Бан)</div>
+                <div class="rule-item">Обход наказания любыми путями (×2 к сроку или Бан)</div>
+                <div class="rule-item">При ложном репорте (Мут на 15-25 мин)</div>
+
+                <span class="rules-cat">⚙️ ДОПОЛНИТЕЛЬНО:</span>
+                • Администрация вправе наказывать без предупреждения при повторах.<br>
+                • <b>4 предупреждения</b> — автоматический бан.<br>
+                • В спорных ситуациях решение принимает владелец/заместитель/старшие админы. Они всегда правы. <b>Бунт против решения — бан на неделю.</b><br>
+                • При однотипных нарушениях первые 3 раза — мут, далее мут + пред.
+            </div>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
         </div>
 
-        <div class="card">
-            <h3>АМНИСТИЯ</h3>
-            <ul>
-                <li>Полное снятие всех блокировок</li>
-                <li>Очистка истории нарушений</li>
-                <li>Возврат в основные чаты</li>
-            </ul>
-            <span class="price-tag">300 ₽ / 200 ⭐</span>
-            <a href="https://t.me/VelikieDonateBot?start=buy_unban" class="btn btn-stars">Оплатить Stars</a>
-            <a href="https://t.me/VelikieDonateBot" class="btn">Картой</a>
+        <div id="donate" class="page">
+            <div class="card">
+                <h2 style="color: var(--gold); text-align:center; margin-bottom:25px; text-transform: uppercase;">💎 ПОДДЕРЖКА ПРОЕКТА</h2>
+                
+                <div class="don-card">
+                    <div class="don-header">💛 Спонсор (200 ₽ / 60 дней)</div>
+                    <ul class="don-list">
+                        <li>Выдаётся уникальный префикс "Спонсор"</li>
+                        <li>Только админы и выше могут выдавать вам наказания</li>
+                        <li>Вы можете спамить чаще</li>
+                    </ul>
+                    <a href="https://t.me/VelikieDonateBot?start=buy_sponsor" class="submit-btn" style="background:#5bc0de; font-size:0.9rem;">ОПЛАТИТЬ STARS (200 ⭐)</a>
+                </div>
+
+                <div class="don-card">
+                    <div class="don-header">🧡 Спонсор+ (400 ₽ / 60 дней)</div>
+                    <ul class="don-list">
+                        <li>Вас может банить только Хелпер зам и заместитель</li>
+                        <li>Префикс "Высший спонсор" (или ваш вариант)</li>
+                        <li>Полный доступ в закрытый чат админов</li>
+                        <li>Возможность предлагать идеи для беседы, канала и ботов</li>
+                        <li>Право подать заявку на модератора в любой момент</li>
+                    </ul>
+                    <a href="https://t.me/VelikieDonateBot?start=buy_sponsor_plus" class="submit-btn" style="background:#5bc0de; font-size:0.9rem;">ОПЛАТИТЬ STARS (400 ⭐)</a>
+                </div>
+
+                <div class="don-card">
+                    <div class="don-header">💎 Инвестор (5000 ₽ / 1 ГОД)</div>
+                    <ul class="don-list">
+                        <li>Вас может банить только владелец чата</li>
+                        <li>Полный иммунитет: вас нельзя замутить или дать варн</li>
+                        <li>Право удалять любые сообщения в чате</li>
+                        <li>Право управлять трансляциями беседы</li>
+                        <li>Реклама ваших каналов/соцсетей (с оповещением владельца)</li>
+                        <li>Право закреплять свои сообщения</li>
+                        <li>Ваши жалобы и просьбы рассматриваются в первую очередь</li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(0,0,0,0.4); padding: 15px; border-radius: 15px; text-align: center; border: 1px dashed var(--gold); margin-bottom: 20px;">
+                    <p style="font-size: 0.8rem; margin-bottom: 5px; opacity: 0.7;">Нажмите на номер, чтобы скопировать:</p>
+                    <b onclick="navigator.clipboard.writeText('2202205034828175'); alert('Номер скопирован!')" style="cursor: pointer; color: var(--gold); font-size: 1.3rem; letter-spacing: 1px;">2202 2050 3482 8175</b>
+                </div>
+                <a href="https://t.me/VelikieDonateBot" class="submit-btn" style="background: var(--gold); color: #000;">ОТПРАВИТЬ ЧЕК В ЛС БОТУ</a>
+            </div>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
+        </div>
+
+        <div id="support" class="page">
+            <div class="card">
+                <h2 style="color: var(--primary); text-align: center;">📬 КАНЦЕЛЯРИЯ</h2>
+                <p style="text-align:center; opacity:0.7; font-size:0.9rem;">Опишите вашу проблему боту.</p>
+                <select id="sup-type">
+                    <option value="💡 ИДЕЯ">💡 Предложить идею</option>
+                    <option value="🔴 ЖАЛОБА">🔴 Подать жалобу</option>
+                    <option value="⚙️ ТЕХ">⚙️ Тех. вопрос</option>
+                </select>
+                <textarea id="sup-msg" rows="5" placeholder="Напишите суть обращения здесь..."></textarea>
+                <button class="submit-btn" onclick="sendSupport()">ОТПРАВИТЬ ЧЕРЕЗ БОТА</button>
+            </div>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
+        </div>
+
+        <div id="admin" class="page">
+            <div class="card">
+                <h2 style="text-align: center; color: var(--gold);">📝 СТАТЬ АДМИНОМ</h2>
+                <p style="text-align:center; opacity:0.7; font-size:0.9rem;">Заполни анкету в чате с ботом.</p>
+                <textarea id="adm-form" rows="8" placeholder="1. Имя/Возраст&#10;2. Опыт администрирования&#10;3. Сколько времени готов уделять?"></textarea>
+                <button class="submit-btn" onclick="sendAdminForm()">ОТПРАВИТЬ АНКЕТУ БОТУ</button>
+            </div>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
+        </div>
+
+        <div id="chats" class="page">
+            <div class="menu-grid">
+                <a href="https://t.me/VelikieBs" class="btn">Основной Чат</a>
+                <a href="https://t.me/VelikieKatakom" class="btn" style="border-color: #e74c3c;">Катакомбы</a>
+                <a href="https://t.me/VelikieBs2" class="btn">Знакомства</a>
+                <a href="https://t.me/snosVelikie" class="btn" style="grid-column: span 2;">Канал Отзывов ⭐</a>
+            </div>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
         </div>
     </div>
 
-    <section class="chancery">
-        <h2 style="font-family: 'Cinzel'; color: var(--gold);">КАНЦЕЛЯРИЯ ИМПЕРИИ</h2>
-        <p>Ваше обращение будет рассмотрено Высшим Советом.</p>
-        <div class="chancery-grid">
-            <a href="https://t.me/VelikieDonateBot" class="btn">Подать Анкету</a>
-            <a href="https://t.me/VelikieDonateBot" class="btn">Предложить Идею</a>
-            <a href="https://t.me/VelikieDonateBot" class="btn">Жалоба</a>
-        </div>
-    </section>
+    <script>
+        const SHEET_URL = `https://docs.google.com/spreadsheets/d/1T9OYL6gd_73llbvdg0zUw43hF0GauaauYF1DYWqWKNs/gviz/tq?tqx=out:csv`;
 
-    <div style="margin-top: 50px; text-align: center;">
-        <h2 style="font-family: 'Cinzel'; color: var(--gold);">ЗАЛ СЛАВЫ</h2>
-        <div class="member-list">
-            <div class="member">Куманик Чёрный Сапфир</div>
-            <div class="member">Admin_Lord</div>
-            <div class="member">Legionnaire</div>
-        </div>
-    </div>
+        async function loadHallOfFame() {
+            try {
+                const response = await fetch(SHEET_URL);
+                const data = await response.text();
+                const rows = data.split('\n');
+                const grid = document.getElementById('hall-of-fame');
+                grid.innerHTML = ''; 
+                rows.forEach(row => {
+                    const columns = row.split(',').map(c => c.replace(/"/g, '').trim());
+                    if (columns.length >= 3 && columns[0] !== "" && columns[0] !== "Имя") {
+                        const safePhoto = `https://wsrv.nl/?url=${encodeURIComponent(columns[2])}&w=150&h=150&fit=cover&mask=circle&errorredirect=https://cdn-icons-png.flaticon.com/512/1067/1067346.png`;
+                        grid.innerHTML += `
+                            <div class="member">
+                                <div class="avatar-wrap"><img src="${safePhoto}" class="avatar"></div>
+                                <b>${columns[0]}</b>
+                                <span>${columns[1]}</span>
+                            </div>`;
+                    }
+                });
+            } catch (e) { grid.innerHTML = '<p>Ошибка загрузки свитка</p>'; }
+        }
 
-</div>
+        loadHallOfFame();
 
-<footer>
-    <p>&copy; 2026 ЦИФРОВАЯ ИМПЕРИЯ ВЕЛИКИХ.</p>
-</footer>
+        function showPage(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
 
+        function toggleMusic() {
+            const m = document.getElementById('bg-music');
+            const icon = document.getElementById('mus-icon');
+            if(m.paused) { m.play(); icon.innerText = '🔊'; }
+            else { m.pause(); icon.innerText = '🔇'; }
+        }
+
+        // ПЕРЕНАПРАВЛЕНИЕ В БОТА С ТЕКСТОМ
+        function sendSupport() {
+            const msg = document.getElementById('sup-msg').value;
+            const type = document.getElementById('sup-type').value;
+            if(!msg) return alert("Введите сообщение!");
+            window.location.href = `https://t.me/VelikieDonateBot`;
+        }
+
+        function sendAdminForm() {
+            const form = document.getElementById('adm-form').value;
+            if(!form) return alert("Заполните анкету!");
+            window.location.href = `https://t.me/VelikieDonateBot`;
+        }
+
+        // КАНВАС
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let clouds = [];
+        function init() {
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            clouds = []; for(let i=0; i<10; i++) clouds.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*250+150, dx: Math.random()*0.4-0.2, dy: Math.random()*0.4-0.2});
+        }
+        function animate() {
+            ctx.clearRect(0,0,canvas.width, canvas.height);
+            clouds.forEach(c => {
+                c.x += c.dx; c.y += c.dy;
+                if(c.x<0 || c.x>canvas.width) c.dx*=-1; if(c.y<0 || c.y>canvas.height) c.dy*=-1;
+                let g = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, c.r);
+                g.addColorStop(0, 'rgba(46, 204, 113, 0.15)'); g.addColorStop(0.5, 'rgba(241, 196, 15, 0.1)'); g.addColorStop(1, 'transparent');
+                ctx.fillStyle = g; ctx.beginPath(); ctx.arc(c.x, c.y, c.r, 0, Math.PI*2); ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        }
+        window.addEventListener('resize', init); init(); animate();
+    </script>
 </body>
 </html>
