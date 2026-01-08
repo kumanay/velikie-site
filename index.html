@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ВЕЛИКИЕ | Sapphire Edition 5.0</title>
+    <title>ВЕЛИКИЕ | Sapphire Full 5.2</title>
     <style>
         :root {
             --bg: #030803;
@@ -48,18 +48,15 @@
             backdrop-filter: blur(15px); box-shadow: 0 15px 35px rgba(0,0,0,0.6);
         }
 
-        /* ЗАЛ СЛАВЫ (ДИНАМИЧЕСКИЙ С ФИКСИРОВАННЫМИ ФОТО) */
         .hall-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 15px; }
-        .member { text-align: center; padding: 10px; transition: 0.3s; }
-        .avatar-wrap {
-            position: relative; width: 75px; height: 75px; margin: 0 auto 10px;
-        }
+        .member { text-align: center; padding: 10px; }
+        .avatar-wrap { position: relative; width: 75px; height: 75px; margin: 0 auto 10px; }
         .avatar-wrap::after {
             content: ''; position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px;
             border-radius: 50%; border: 2px solid var(--gold);
             animation: rotate 8s linear infinite; box-shadow: 0 0 10px var(--gold-glow);
         }
-        .avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #111; border: 2px solid transparent; }
+        .avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #111; }
         .member b { display: block; color: #fff; font-size: 0.85rem; margin-top: 5px; }
         .member span { display: block; color: var(--gold); font-size: 0.65rem; text-transform: uppercase; }
 
@@ -70,37 +67,30 @@
             text-align: center; transition: 0.3s; font-weight: bold;
             display: flex; flex-direction: column; align-items: center; gap: 8px; text-decoration: none;
         }
-        .btn:hover { background: var(--primary); color: #000; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3); }
+        .btn:hover { background: var(--primary); color: #000; transform: translateY(-3px); }
         .btn-main { grid-column: span 2; background: var(--gold); color: #000; font-size: 1.2rem; border: none; }
-        .btn-main:hover { background: #fff; box-shadow: 0 0 20px #fff; }
 
-        .full-rules { text-align: left; font-size: 1rem; line-height: 1.5; }
-        .rules-cat { color: var(--primary); font-weight: bold; margin-top: 15px; display: block; border-bottom: 1px solid #2ecc7133; padding-bottom: 3px; margin-bottom: 8px;}
+        /* СТИЛЬ ПРАВИЛ И ДОНАТОВ */
+        .full-rules { text-align: left; font-size: 0.95rem; line-height: 1.5; }
+        .rules-cat { color: var(--gold); font-weight: bold; margin-top: 18px; display: block; border-bottom: 1px solid rgba(241,196,15,0.3); padding-bottom: 3px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;}
+        .rule-item { margin-bottom: 8px; padding-left: 10px; border-left: 2px solid var(--primary); }
 
-        .don-item { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #222; }
-        .don-title { color: var(--gold); font-size: 1.2rem; font-weight: bold; }
-        .don-list { margin-top: 8px; list-style: none; font-size: 0.9rem; opacity: 0.9; }
-        .don-list li::before { content: "🔹 "; color: var(--gold); }
+        .don-card { margin-bottom: 25px; }
+        .don-header { color: var(--gold); font-size: 1.3rem; font-weight: bold; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .don-list { list-style: none; padding-left: 5px; }
+        .don-list li { margin-bottom: 7px; font-size: 0.9rem; opacity: 0.9; display: flex; align-items: flex-start; gap: 8px; }
+        .don-list li::before { content: "✔"; color: var(--gold); font-weight: bold; }
 
-        select, input, textarea {
-            width: 100%; padding: 14px; margin: 10px 0;
-            background: rgba(0,0,0,0.6); border: 1px solid var(--primary);
-            color: white; border-radius: 10px; font-size: 1rem;
-        }
-        .submit-btn {
-            width: 100%; background: var(--primary); color: black; border: none; 
-            padding: 16px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1.1rem; text-decoration: none; display: block; text-align: center;
-        }
-
-        .page { display: none; animation: fadeIn 0.4s ease forwards; }
-        .page.active { display: block; }
         .back-btn {
             display: block; width: 100%; margin-top: 25px; padding: 15px;
             border: 2px solid var(--primary); background: none; color: var(--primary); border-radius: 12px; font-weight: bold; cursor: pointer;
         }
 
+        .page { display: none; animation: fadeIn 0.4s ease forwards; }
+        .page.active { display: block; }
+
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
@@ -138,53 +128,82 @@
             </div>
         </div>
 
-        <div id="support" class="page">
-            <div class="card">
-                <h2 style="color: var(--primary); text-align: center;">📬 КАНЦЕЛЯРИЯ</h2>
-                <select id="sup-type">
-                    <option value="💡 ИДЕЯ">💡 Предложить идею</option>
-                    <option value="🔴 ЖАЛОБА">🔴 Подать жалобу</option>
-                    <option value="⚙️ ТЕХ">⚙️ Тех. вопрос</option>
-                </select>
-                <input type="text" id="sup-tg" placeholder="Твой @username">
-                <textarea id="sup-msg" rows="5" placeholder="Опишите суть обращения максимально подробно..."></textarea>
-                <button class="submit-btn" id="sup-btn" onclick="sendSupport()">ОТПРАВИТЬ В ШТАБ</button>
-            </div>
-            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
-        </div>
-
         <div id="rules" class="page">
             <div class="card full-rules">
-                <h2 style="color: var(--primary); text-align:center;">🌋 ВЕЛИКИЕ ЗАКОНЫ</h2>
+                <h2 style="color: var(--gold); text-align:center; text-transform: uppercase;">🌋 ВЕЛИКИЕ ЗАКОНЫ</h2>
+                
                 <span class="rules-cat">🚫 ЗАПРЕЩЕНО:</span>
-                • <b>СПАМ/ФЛУД</b> (лесенки, повторы, гиф, видео) — мут 15 мин-1ч<br>
-                • <b>РЕКЛАМА</b> (любая) без согласования — БАН<br>
-                • Замещение владельца без разрешения — мут/бан<br>
-                • Контент 18+/16+ (<b>разрешён после 22:00 МСК</b>)<br>
+                <div class="rule-item"><b>СПАМ:</b> лесенки, повторяющиеся символы, гифки, видео, флуд командами и т.д. (Мут 15 мин-1ч)</div>
+                <div class="rule-item"><b>РЕКЛАМА:</b> любая реклама без согласования с владельцем (Мут-Бан)</div>
+                <div class="rule-item"><b>ЗАМЕЩЕНИЕ:</b> замещение владельца без разрешения (Мут-Бан)</div>
+                <div class="rule-item"><b>КОНТЕНТ 18+/16+:</b> разрешён после 22:00 МСК. Запрещены всегда: детский контент, зоофилия, насилие, резня (Мут-Пред)</div>
+
                 <span class="rules-cat">📮 ТЕМЫ-ТАБУ:</span>
-                • Оскорбления нации, религия, политика — мут 10–35 мин<br>
-                • Обсуждение наркотиков на серьёзной основе — мут 25 мин–24 ч / бан<br>
-                • Треш-контент — Мут/Пред / бан<br>
-                • <b>Пдф (пидофилия)</b> — бан навсегда.<br>
-                <span class="rules-cat">📍 ПОРЯДОК:</span>
-                • Конфликты и провокации — мут 15 мин – 1 ч<br>
-                • Обход наказания — ×2 к сроку или бан<br>
-                • <b>4 предупреждения</b> — автоматический бан.
+                <div class="rule-item">Оскорбления нации, религия, политика, дипломатия (Мут 10–35 мин)</div>
+                <div class="rule-item">Обсуждение наркотиков на серьезной основе (Мут 25 мин–24 ч / Пред / Бан)</div>
+                <div class="rule-item">Треш-контент (Мут / Пред / Бан)</div>
+
+                <span class="rules-cat">🔞 ПДФ (ПИДОФИЛИЯ):</span>
+                <div class="rule-item">Наказываются склонности к пдф (Пред-Бан)</div>
+                <div class="rule-item">Темы, относящиеся к пдф по факту (Мут / Пред)</div>
+                <div class="rule-item">Если вам сделали замечание об удалении контента по этой теме — удалите его. Мы заботимся о комфорте участников.</div>
+
+                <span class="rules-cat">📍 ПОРЯДОК И НАРУШЕНИЯ:</span>
+                <div class="rule-item">Конфликты, провокации, оскорбления, ссоры (Мут 15 мин – 1 ч / Пред / Бан)</div>
+                <div class="rule-item">Обход наказания любыми путями (×2 к сроку или Бан)</div>
+                <div class="rule-item">При ложном репорте (Мут на 15-25 мин)</div>
+
+                <span class="rules-cat">⚙️ ДОПОЛНИТЕЛЬНО:</span>
+                • Администрация вправе наказывать без предупреждения при повторах.<br>
+                • <b>4 предупреждения</b> — автоматический бан.<br>
+                • В спорных ситуациях решение принимает владелец/заместитель/старшие админы. Они всегда правы. <b>Бунт против решения — бан на неделю.</b><br>
+                • При однотипных нарушениях первые 3 раза — мут, далее мут + пред.
             </div>
             <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
         </div>
 
         <div id="donate" class="page">
             <div class="card">
-                <h2 style="color: var(--gold); text-align:center; margin-bottom:20px;">💎 ПОДДЕРЖКА ПРОЕКТА</h2>
-                <div class="don-item"><div class="don-title">💛 Спонсор (200 ₽)</div><ul class="don-list"><li>Префикс в чате</li><li>Приоритет в наказаниях</li></ul></div>
-                <div class="don-item"><div class="don-title">💛 Спонсор+ (400 ₽)</div><ul class="don-list"><li>Секретный чат админов</li><li>Шанс на модерку</li></ul></div>
-                <div class="don-item" style="border:none;"><div class="don-title">💎 Инвестор (5000 ₽)</div><ul class="don-list"><li>Полный иммунитет</li><li>Реклама в закрепе</li></ul></div>
-                <div style="background: rgba(0,0,0,0.4); padding: 15px; border-radius: 15px; text-align: center; border: 1px dashed var(--gold); margin-bottom: 20px;">
-                    <p>Карта Сбербанка:</p>
-                    <b onclick="navigator.clipboard.writeText('2202205034828175'); alert('Скопировано!')" style="cursor: pointer; color: var(--gold); font-size: 1.2rem;">2202 2050 3482 8175</b>
+                <h2 style="color: var(--gold); text-align:center; margin-bottom:25px; text-transform: uppercase;">💎 ПОДДЕРЖКА ПРОЕКТА</h2>
+                
+                <div class="don-card">
+                    <div class="don-header">💛 Спонсор (200 ₽)</div>
+                    <ul class="don-list">
+                        <li>Выдаётся уникальный префикс "Спонсор"</li>
+                        <li>Только админы и выше могут выдавать вам наказания</li>
+                        <li>Вы можете спамить чаще</li>
+                    </ul>
                 </div>
-                <a href="https://t.me/KumaWelikiy" class="submit-btn" style="background: var(--gold);">ОТПРАВИТЬ ЧЕК В ЛС</a>
+
+                <div class="don-card">
+                    <div class="don-header">🧡 Спонсор+ (400 ₽)</div>
+                    <ul class="don-list">
+                        <li>Вас может банить только Хелпер зам и заместитель</li>
+                        <li>Префикс "Высший спонсор" (или ваш вариант)</li>
+                        <li>Полный доступ в закрытый чат админов</li>
+                        <li>Возможность предлагать идеи для беседы, канала и ботов</li>
+                        <li>Право подать заявку на модератора в любой момент</li>
+                    </ul>
+                </div>
+
+                <div class="don-card" style="border:none;">
+                    <div class="don-header">💎 Инвестор (5000 ₽)</div>
+                    <ul class="don-list">
+                        <li>Вас может банить только владелец чата</li>
+                        <li>Полный иммунитет: вас нельзя замутить или дать варн</li>
+                        <li>Право удалять любые сообщения в чате</li>
+                        <li>Право управлять трансляциями беседы</li>
+                        <li>Реклама ваших каналов/соцсетей (с оповещением владельца)</li>
+                        <li>Право закреплять свои сообщения</li>
+                        <li>Ваши жалобы и просьбы рассматриваются в первую очередь</li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(0,0,0,0.4); padding: 15px; border-radius: 15px; text-align: center; border: 1px dashed var(--gold); margin-bottom: 20px;">
+                    <p style="font-size: 0.8rem; margin-bottom: 5px; opacity: 0.7;">Нажмите на номер, чтобы скопировать:</p>
+                    <b onclick="navigator.clipboard.writeText('2202205034828175'); alert('Номер скопирован!')" style="cursor: pointer; color: var(--gold); font-size: 1.3rem; letter-spacing: 1px;">2202 2050 3482 8175</b>
+                </div>
+                <a href="https://t.me/KumaWelikiy" class="btn" style="background: var(--gold); color: #000; border:none; width:100%; font-size:1.1rem;">ОТПРАВИТЬ ЧЕК В ЛС</a>
             </div>
             <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
         </div>
@@ -197,7 +216,7 @@
                 <a href="https://t.me/VelikieSohri" class="btn">Великие Сохры</a>
                 <a href="https://t.me/snosVelikie" class="btn" style="grid-column: span 2;">Канал Отзывов ⭐</a>
             </div>
-            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
         </div>
 
         <div id="admin" class="page">
@@ -206,17 +225,31 @@
                 <input type="text" id="adm-name" placeholder="Ник и ваш возраст">
                 <input type="text" id="adm-tg" placeholder="Ваш @username">
                 <textarea id="adm-exp" rows="5" placeholder="Ваш опыт..."></textarea>
-                <button class="submit-btn" onclick="sendAdminForm()">ОТПРАВИТЬ АНКЕТУ</button>
+                <button class="submit-btn" style="width:100%; background:var(--primary); color:black; border:none; padding:15px; border-radius:10px; font-weight:bold; cursor:pointer;" onclick="sendAdminForm()">ОТПРАВИТЬ АНКЕТУ</button>
             </div>
-            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
+        </div>
+
+        <div id="support" class="page">
+            <div class="card">
+                <h2 style="color: var(--primary); text-align: center;">📬 КАНЦЕЛЯРИЯ</h2>
+                <select id="sup-type">
+                    <option value="💡 ИДЕЯ">💡 Предложить идею</option>
+                    <option value="🔴 ЖАЛОБА">🔴 Подать жалобу</option>
+                    <option value="⚙️ ТЕХ">⚙️ Тех. вопрос</option>
+                </select>
+                <input type="text" id="sup-tg" placeholder="Твой @username">
+                <textarea id="sup-msg" rows="5" placeholder="Опишите суть обращения..."></textarea>
+                <button class="submit-btn" style="width:100%; background:var(--primary); color:black; border:none; padding:15px; border-radius:10px; font-weight:bold; cursor:pointer;" onclick="sendSupport()">ОТПРАВИТЬ</button>
+            </div>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
         </div>
     </div>
 
     <script>
         const BOT_TOKEN = '8585491155:AAHzbeeEIPVSyI3Q3J5FfbxRLZ21GrioRnE';
         const CHAT_ID = '-1002207962264';
-        const SPREADSHEET_ID = '1T9OYL6gd_73llbvdg0zUw43hF0GauaauYF1DYWqWKNs';
-        const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv`;
+        const SHEET_URL = `https://docs.google.com/spreadsheets/d/1T9OYL6gd_73llbvdg0zUw43hF0GauaauYF1DYWqWKNs/gviz/tq?tqx=out:csv`;
 
         async function loadHallOfFame() {
             try {
@@ -225,24 +258,19 @@
                 const rows = data.split('\n');
                 const grid = document.getElementById('hall-of-fame');
                 grid.innerHTML = ''; 
-
                 rows.forEach(row => {
                     const columns = row.split(',').map(c => c.replace(/"/g, '').trim());
-                    if (columns.length >= 3 && columns[0] !== "") {
-                        // ФИКС КАРТИНКИ ЧЕРЕЗ ПРОКСИ WSRV (для РФ и обхода блокировок)
+                    if (columns.length >= 3 && columns[0] !== "" && columns[0] !== "Имя") {
                         const safePhoto = `https://wsrv.nl/?url=${encodeURIComponent(columns[2])}&w=150&h=150&fit=cover&mask=circle&errorredirect=https://cdn-icons-png.flaticon.com/512/1067/1067346.png`;
-                        
                         grid.innerHTML += `
                             <div class="member">
-                                <div class="avatar-wrap"><img src="${safePhoto}" class="avatar" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1067/1067346.png'"></div>
+                                <div class="avatar-wrap"><img src="${safePhoto}" class="avatar"></div>
                                 <b>${columns[0]}</b>
                                 <span>${columns[1]}</span>
                             </div>`;
                     }
                 });
-            } catch (e) {
-                document.getElementById('hall-of-fame').innerHTML = '<p>Ошибка таблиц</p>';
-            }
+            } catch (e) { grid.innerHTML = '<p>Ошибка загрузки свитка</p>'; }
         }
 
         loadHallOfFame();
@@ -277,29 +305,17 @@
         let clouds = [];
         function init() {
             canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            clouds = []; for(let i=0; i<10; i++) clouds.push(new Cloud());
-        }
-        class Cloud {
-            constructor() {
-                this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
-                this.r = Math.random() * 250 + 150; this.dx = Math.random() * 0.4 - 0.2; this.dy = Math.random() * 0.4 - 0.2;
-            }
-            update() {
-                this.x += this.dx; this.y += this.dy;
-                if(this.x < 0 || this.x > canvas.width) this.dx *= -1;
-                if(this.y < 0 || this.y > canvas.height) this.dy *= -1;
-            }
-            draw() {
-                let g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r);
-                g.addColorStop(0, 'rgba(46, 204, 113, 0.2)');
-                g.addColorStop(0.5, 'rgba(241, 196, 15, 0.15)');
-                g.addColorStop(1, 'transparent');
-                ctx.fillStyle = g; ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI*2); ctx.fill();
-            }
+            clouds = []; for(let i=0; i<10; i++) clouds.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*250+150, dx: Math.random()*0.4-0.2, dy: Math.random()*0.4-0.2});
         }
         function animate() {
             ctx.clearRect(0,0,canvas.width, canvas.height);
-            clouds.forEach(c => { c.update(); c.draw(); });
+            clouds.forEach(c => {
+                c.x += c.dx; c.y += c.dy;
+                if(c.x<0 || c.x>canvas.width) c.dx*=-1; if(c.y<0 || c.y>canvas.height) c.dy*=-1;
+                let g = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, c.r);
+                g.addColorStop(0, 'rgba(46, 204, 113, 0.15)'); g.addColorStop(0.5, 'rgba(241, 196, 15, 0.1)'); g.addColorStop(1, 'transparent');
+                ctx.fillStyle = g; ctx.beginPath(); ctx.arc(c.x, c.y, c.r, 0, Math.PI*2); ctx.fill();
+            });
             requestAnimationFrame(animate);
         }
         window.addEventListener('resize', init); init(); animate();
