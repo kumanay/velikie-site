@@ -77,13 +77,16 @@
         .btn:hover { background: var(--primary); color: #000; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3); }
         .btn-gold { border-color: var(--gold); color: var(--gold); }
 
-        /* ТЕКСТОВЫЕ БЛОКИ */
+        /* ТЕКСТОВЫЕ БЛОКИ ПРАВИЛ */
         .full-rules { text-align: left; font-size: 0.95rem; line-height: 1.6; }
         .rules-cat { color: var(--primary); font-weight: bold; margin-top: 15px; display: block; border-bottom: 1px solid #2ecc7133; padding-bottom: 3px; margin-bottom: 8px;}
         
-        .don-item { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #222; }
+        /* ДОНАТ БЛОКИ */
+        .don-item { margin-bottom: 20px; padding: 15px; border: 1px solid rgba(241, 196, 15, 0.2); border-radius: 15px; background: rgba(0,0,0,0.3); }
+        .don-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
         .don-title { color: var(--gold); font-size: 1.2rem; font-weight: bold; }
-        .don-list { margin-top: 8px; list-style: none; font-size: 0.9rem; opacity: 0.9; }
+        .don-price { background: var(--gold); color: black; padding: 2px 8px; border-radius: 5px; font-weight: bold; font-size: 0.9rem; }
+        .don-list { list-style: none; font-size: 0.9rem; opacity: 0.9; }
         .don-list li::before { content: "🔹 "; color: var(--gold); }
 
         select, input, textarea {
@@ -142,9 +145,10 @@
         <div id="olimp" class="page">
             <div class="card" style="border-color: var(--gold); background: rgba(20, 15, 5, 0.95);">
                 <h2 style="color: var(--gold); text-align: center;">💎 ОЛИМП</h2>
+                <p style="text-align: center; font-size: 0.9rem; margin-bottom: 20px;">Наши почетные меценаты</p>
                 <div class="hall-grid" id="donat-list"></div>
             </div>
-            <button class="back-btn" onclick="showPage('home')" style="border-color: var(--gold); color: var(--gold);">← НАЗАД</button>
+            <button class="back-btn" onclick="showPage('home')" style="border-color: var(--gold); color: var(--gold);">← НА ЗАД</button>
         </div>
 
         <div id="rules" class="page">
@@ -152,28 +156,58 @@
                 <h2 style="color: var(--primary); text-align:center;">🌋 ВЕЛИКИЕ ЗАКОНЫ</h2>
                 <span class="rules-cat">🚫 ЗАПРЕЩЕНО:</span>
                 • <b>СПАМ/ФЛУД</b> (лесенки, повторы, гиф, видео) — мут 15 мин-1ч<br>
-                • <b>РЕКЛАМА</b> (любая) — БАН<br>
-                • Контент 18+/16+ (<b>разрешён после 22:00 МСК</b>)<br>
+                • <b>РЕКЛАМА</b> (любых сторонних проектов) — БАН БЕЗ ОБСУЖДЕНИЯ<br>
+                • Контент 18+/16+ (порнография, жестокость) — <b>разрешён строго после 22:00 МСК</b><br>
                 <span class="rules-cat">📮 ТЕМЫ-ТАБУ:</span>
-                • Оскорбления нации, религия, политика — мут 10–35 мин<br>
-                • Обсуждение наркотиков — мут/бан<br>
-                • <b>Пдф (пидофилия)</b> — БАН НАВСЕГДА.<br>
+                • Оскорбления нации, религия, политика — мут 10–35 мин (зависит от тяжести)<br>
+                • Обсуждение наркотиков — мут на 12 часов / бан<br>
+                • <b>Пдф (пидофилия)</b> — БАН НАВСЕГДА БЕЗ ПРАВА АПЕЛЛЯЦИИ.<br>
                 <span class="rules-cat">📍 ПОРЯДОК:</span>
-                • <b>4 предупреждения</b> — автоматический бан.
+                • <b>4 предупреждения (варна)</b> — автоматический бан системой.<br>
+                • Уважение к администрации и участникам — обязательно.
             </div>
             <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
         </div>
 
         <div id="donate" class="page">
             <div class="card">
-                <h2 style="color: var(--gold); text-align:center;">💎 ПОДДЕРЖКА</h2>
-                <div class="don-item"><div class="don-title">💛 Спонсор (200 ₽)</div><ul class="don-list"><li>Префикс в чате</li><li>Приоритет в наказаниях</li></ul></div>
-                <div class="don-item"><div class="don-title">💛 Спонсор+ (400 ₽)</div><ul class="don-list"><li>Секретный чат админов</li><li>Шанс на модерку</li></ul></div>
-                <div class="don-item" style="border:none;"><div class="don-title">💎 Инвестор (5000 ₽)</div><ul class="don-list"><li>Полный иммунитет</li><li>Реклама в закрепе</li></ul></div>
-                <div style="background: rgba(0,0,0,0.4); padding: 15px; border-radius: 15px; text-align: center; border: 1px dashed var(--gold); margin-bottom: 20px;">
-                    Карта Сбербанка: <b style="color: var(--gold);">2202 2050 3482 8175</b>
+                <h2 style="color: var(--gold); text-align:center;">💎 ПОДДЕРЖКА ПРОЕКТА</h2>
+                <p style="text-align: center; opacity: 0.7; margin-bottom: 20px;">Покупая донат, вы помогаете штабу развиваться.</p>
+                
+                <div class="don-item">
+                    <div class="don-header"><span class="don-title">💛 Спонсор</span><span class="don-price">200 ₽ / мес.</span></div>
+                    <ul class="don-list">
+                        <li>Уникальный префикс в чате</li>
+                        <li>Приоритетное рассмотрение жалоб</li>
+                        <li>Иммунитет к легким нарушениям</li>
+                    </ul>
                 </div>
-                <a href="https://t.me/KumaWelikiy" class="submit-btn" style="background: var(--gold);">ОТПРАВИТЬ ЧЕК</a>
+
+                <div class="don-item">
+                    <div class="don-header"><span class="don-title">💛 Спонсор+</span><span class="don-price">400 ₽ / мес.</span></div>
+                    <ul class="don-list">
+                        <li>Доступ в секретный чат администрации</li>
+                        <li>Шанс стать модератором вне очереди</li>
+                        <li>Возможность кикать (с одобрения админа)</li>
+                    </ul>
+                </div>
+
+                <div class="don-item" style="border-color: var(--gold); box-shadow: 0 0 10px var(--gold-glow);">
+                    <div class="don-header"><span class="don-title">💎 Инвестор</span><span class="don-price">5000 ₽ / НАВСЕГДА</span></div>
+                    <ul class="don-list">
+                        <li>Полный иммунитет к банам и мутам</li>
+                        <li>Личная реклама вашего проекта в закрепе (1 раз)</li>
+                        <li>Добавление на Олимп сайта навсегда</li>
+                        <li>Прямая связь с владельцем (Кумаником)</li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(0,0,0,0.5); padding: 20px; border-radius: 15px; text-align: center; border: 1px dashed var(--gold); margin: 20px 0;">
+                    Реквизиты (Сбербанк):<br>
+                    <b style="color: var(--gold); font-size: 1.3rem; letter-spacing: 1px;">2202 2050 3482 8175</b><br>
+                    <span style="font-size: 0.8rem; opacity: 0.6;">Получатель: Андрей К.</span>
+                </div>
+                <a href="https://t.me/KumaWelikiy" class="submit-btn" style="background: var(--gold);">ОТПРАВИТЬ ЧЕК В ЛС</a>
             </div>
             <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
         </div>
@@ -183,12 +217,13 @@
                 <h2 style="color: var(--primary); text-align: center;">📬 КАНЦЕЛЯРИЯ</h2>
                 <select id="sup-type">
                     <option value="💡 ИДЕЯ">💡 Предложить идею</option>
-                    <option value="🔴 ЖАЛОБА">🔴 Подать жалобу</option>
-                    <option value="⚙️ ТЕХ">⚙️ Тех. вопрос</option>
+                    <option value="🔴 ЖАЛОБА">🔴 Подать жалобу на игрока</option>
+                    <option value="⚠️ ЖАЛОБА АДМ">⚠️ Жалоба на админа</option>
+                    <option value="⚙️ ТЕХ">⚙️ Технический вопрос</option>
                 </select>
-                <input type="text" id="sup-tg" placeholder="Твой @username">
-                <textarea id="sup-msg" rows="5" placeholder="Опишите суть..."></textarea>
-                <button class="submit-btn" onclick="sendSupport()">ОТПРАВИТЬ</button>
+                <input type="text" id="sup-tg" placeholder="Твой Telegram (@username)">
+                <textarea id="sup-msg" rows="5" placeholder="Подробно опишите вашу ситуацию..."></textarea>
+                <button class="submit-btn" onclick="sendSupport()">ОТПРАВИТЬ ОБРАЩЕНИЕ</button>
             </div>
             <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
         </div>
@@ -196,8 +231,9 @@
         <div id="admin" class="page">
             <div class="card">
                 <h2 style="text-align: center;">📝 СТАТЬ АДМИНОМ</h2>
-                <input type="text" id="adm-tg" placeholder="Твой @username">
-                <textarea id="adm-exp" rows="5" placeholder="Ваш опыт..."></textarea>
+                <p style="text-align:center; font-size: 0.8rem; margin-bottom: 15px; opacity:0.7;">Мы ищем активных и ответственных ребят.</p>
+                <input type="text" id="adm-tg" placeholder="Твой Telegram (@username)">
+                <textarea id="adm-exp" rows="5" placeholder="Расскажи о себе: возраст, опыт в других чатах, сколько времени готов уделять..."></textarea>
                 <button class="submit-btn" onclick="sendAdminForm()">ОТПРАВИТЬ АНКЕТУ</button>
             </div>
             <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
@@ -246,14 +282,15 @@
         async function sendSupport() {
             const text = `📬 КАНЦЕЛЯРИЯ\n👤 От: ${document.getElementById('sup-tg').value}\n💬: ${document.getElementById('sup-msg').value}`;
             await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(text)}`);
-            alert("Отправлено!"); showPage('home');
+            alert("Ваше обращение доставлено в штаб!"); showPage('home');
         }
         async function sendAdminForm() {
-            const text = `📝 ЗАЯВКА\n👤 От: ${document.getElementById('adm-tg').value}\n📜 Опыт: ${document.getElementById('adm-exp').value}`;
+            const text = `📝 ЗАЯВКА В АДМИНЫ\n👤 От: ${document.getElementById('adm-tg').value}\n📜 Опыт: ${document.getElementById('adm-exp').value}`;
             await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(text)}`);
-            alert("Анкета ушла!"); showPage('home');
+            alert("Анкета принята! Ожидайте ответа."); showPage('home');
         }
 
+        // Анимация фона (ОСТАВЛЕНА БЕЗ ИЗМЕНЕНИЙ)
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         let clouds = [];
