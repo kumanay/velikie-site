@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ВЕЛИКИЕ | ОФИЦИАЛЬНЫЙ ПОРТАЛ</title>
+    <title>ВЕЛИКИЕ | V6.2 Final</title>
     <style>
         :root {
             --bg: #030803;
@@ -49,15 +49,24 @@
             backdrop-filter: blur(15px); box-shadow: 0 15px 35px rgba(0,0,0,0.6);
         }
 
-        .hall-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 15px; }
-        .member { text-align: center; padding: 10px; }
-        .avatar-wrap { position: relative; width: 75px; height: 75px; margin: 0 auto 10px; }
+        /* ИСПРАВЛЕННЫЙ ЗАЛ СЛАВЫ (3 в ряд без вылетов) */
+        .hall-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 10px; 
+            margin-top: 15px; 
+            width: 100%;
+        }
+        .member { text-align: center; padding: 5px; min-width: 0; }
+        .avatar-wrap { position: relative; width: 65px; height: 65px; margin: 0 auto 10px; }
         .avatar-wrap::after {
             content: ''; position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px;
             border-radius: 50%; border: 2px solid var(--gold);
             animation: rotate 8s linear infinite; box-shadow: 0 0 10px var(--gold-glow);
         }
         .avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #111; }
+        .member b { display: block; color: #fff; font-size: 0.75rem; margin-top: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .member span { display: block; color: var(--gold); font-size: 0.6rem; text-transform: uppercase; }
 
         .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .btn {
@@ -69,33 +78,36 @@
         .btn:hover { background: var(--primary); color: #000; transform: translateY(-3px); }
         .btn-main { grid-column: span 2; background: var(--gold); color: #000; font-size: 1.2rem; border: none; }
 
-        /* ЗАКОНЫ */
         .full-rules { text-align: left; font-size: 0.95rem; line-height: 1.5; }
         .rules-cat { color: var(--gold); font-weight: bold; margin-top: 18px; display: block; border-bottom: 1px solid rgba(241,196,15,0.3); padding-bottom: 3px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;}
         .rule-item { margin-bottom: 8px; padding-left: 10px; border-left: 2px solid var(--primary); }
 
-        /* ДОНАТЫ */
-        .don-card { margin-bottom: 25px; border-bottom: 1px solid #222; padding-bottom: 15px; }
-        .don-header { color: var(--gold); font-size: 1.2rem; font-weight: bold; margin-bottom: 10px; }
+        .don-card { margin-bottom: 25px; border-bottom: 1px solid #333; padding-bottom: 20px;}
+        .don-header { color: var(--gold); font-size: 1.2rem; font-weight: bold; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
         .don-list { list-style: none; padding-left: 5px; margin-bottom: 15px; }
         .don-list li { margin-bottom: 7px; font-size: 0.9rem; opacity: 0.9; display: flex; align-items: flex-start; gap: 8px; }
-        .don-list li::before { content: "✔"; color: var(--gold); }
+        .don-list li::before { content: "✔"; color: var(--gold); font-weight: bold; }
+
         .don-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .btn-pay { padding: 12px; border-radius: 10px; text-decoration: none; font-size: 0.85rem; font-weight: bold; text-align: center; transition: 0.3s; }
+        .btn-pay { padding: 14px; border-radius: 12px; text-decoration: none; font-size: 0.9rem; font-weight: bold; text-align: center; transition: 0.3s; cursor: pointer;}
         .btn-stars { background: #0088cc; color: white; border: none; }
-        .btn-card { border: 1px solid var(--gold); color: var(--gold); }
+        .btn-card { border: 1px solid var(--gold); color: var(--gold); background: none; }
+        .btn-pay:hover { opacity: 0.8; transform: translateY(-2px); }
 
         select, input, textarea {
             width: 100%; padding: 16px; margin: 12px 0;
             background: var(--input-bg); border: 1px solid #444; border-left: 3px solid var(--primary);
             color: white; border-radius: 12px; font-size: 1.05rem; outline: none;
+            font-family: inherit;
         }
 
         .submit-btn {
             width: 100%; background: var(--primary); color: black; border: none; 
             padding: 18px; border-radius: 12px; font-weight: bold; cursor: pointer; 
             font-size: 1.1rem; text-transform: uppercase; transition: 0.3s;
+            text-align: center; text-decoration: none; display: block;
         }
+        .submit-btn:hover { transform: scale(1.02); box-shadow: 0 0 20px rgba(46, 204, 113, 0.4); }
 
         .back-btn {
             display: block; width: 100%; margin-top: 25px; padding: 15px;
@@ -149,10 +161,10 @@
                 <h2 style="color: var(--gold); text-align:center; text-transform: uppercase;">🌋 ВЕЛИКИЕ ЗАКОНЫ</h2>
                 
                 <span class="rules-cat">🚫 ЗАПРЕЩЕНО:</span>
-                <div class="rule-item"><b>СПАМ:</b> лесенки, повторяющиеся символы, гифки, видео, флуд командами и т.д. (Мут 15 мин-1ч)</div>
-                <div class="rule-item"><b>РЕКЛАМА:</b> любая реклама без согласования с владельцем (Мут-Бан)</div>
+                <div class="rule-item"><b>СПАМ:</b> лесенки, повторы, гифки, видео, флуд командами и т.д. (Мут 15 мин-1ч)</div>
+                <div class="rule-item"><b>РЕКЛАМА:</b> любая реклама без согласования (Мут-Бан)</div>
                 <div class="rule-item"><b>ЗАМЕЩЕНИЕ:</b> замещение владельца без разрешения (Мут-Бан)</div>
-                <div class="rule-item"><b>КОНТЕНТ 18+/16+:</b> разрешён после 22:00 МСК. Запрещены всегда: детский контент, зоофилия, насилие, резня (Мут-Пред)</div>
+                <div class="rule-item"><b>КОНТЕНТ 18+/16+:</b> после 22:00 МСК. Запрещены: детский контент, зоофилия, насилие, резня (Мут-Пред)</div>
 
                 <span class="rules-cat">📮 ТЕМЫ-ТАБУ:</span>
                 <div class="rule-item">Оскорбления нации, религия, политика, дипломатия (Мут 10–35 мин)</div>
@@ -165,19 +177,19 @@
 
                 <span class="rules-cat">📍 ПОРЯДОК:</span>
                 <div class="rule-item">Конфликты, провокации, оскорбления, ссоры (Мут 15 мин – 1 ч / Пред / Бан)</div>
-                <div class="rule-item">Обход наказания любыми путями (×2 к сроку или Бан)</div>
+                <div class="rule-item">Обход наказания (×2 к сроку или Бан)</div>
                 <div class="rule-item">При ложном репорте (Мут на 15-25 мин)</div>
 
                 <span class="rules-cat">⚙️ ДОПОЛНИТЕЛЬНО:</span>
                 • 4 предупреждения — автоматический бан.<br>
                 • Бунт против решения администрации — бан на неделю.
             </div>
-            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
         </div>
 
         <div id="donate" class="page">
             <div class="card">
-                <h2 style="color: var(--gold); text-align:center; margin-bottom:25px;">💎 ПОДДЕРЖКА</h2>
+                <h2 style="color: var(--gold); text-align:center; margin-bottom:25px; text-transform: uppercase;">💎 ПОДДЕРЖКА ПРОЕКТА</h2>
                 
                 <div class="don-card">
                     <div class="don-header">💛 Спонсор (200 ₽ / 60 дней)</div>
@@ -188,7 +200,7 @@
                     </ul>
                     <div class="don-btns">
                         <a href="https://t.me/VelikieDonateBot?start=buy_sponsor" class="btn-pay btn-stars">STARS (200 ⭐)</a>
-                        <a href="https://t.me/VelikieDonateBot" class="btn-pay btn-card">КАРТОЙ / ЧЕК</a>
+                        <a href="https://t.me/VelikieDonateBot?start=pay_card" class="btn-pay btn-card">КАРТОЙ / ЧЕК</a>
                     </div>
                 </div>
 
@@ -198,11 +210,12 @@
                         <li>Вас может банить только Хелпер зам и выше</li>
                         <li>Префикс "Высший спонсор"</li>
                         <li>Полный доступ в закрытый чат админов</li>
-                        <li>Право подать заявку на модератора в любой момент</li>
+                        <li>Возможность предлагать идеи</li>
+                        <li>Право подать на модератора в любой момент</li>
                     </ul>
                     <div class="don-btns">
                         <a href="https://t.me/VelikieDonateBot?start=buy_sponsor_plus" class="btn-pay btn-stars">STARS (400 ⭐)</a>
-                        <a href="https://t.me/VelikieDonateBot" class="btn-pay btn-card">КАРТОЙ / ЧЕК</a>
+                        <a href="https://t.me/VelikieDonateBot?start=pay_card" class="btn-pay btn-card">КАРТОЙ / ЧЕК</a>
                     </div>
                 </div>
 
@@ -212,12 +225,13 @@
                         <li>Вас может банить только владелец</li>
                         <li>Полный иммунитет от мутов и варнов</li>
                         <li>Право удалять любые сообщения в чате</li>
+                        <li>Реклама ваших каналов/соцсетей</li>
                         <li>Право закреплять свои сообщения</li>
                     </ul>
-                    <a href="https://t.me/VelikieDonateBot" class="submit-btn" style="background:var(--gold); color:#000;">СВЯЗАТЬСЯ С ВЛАДЕЛЬЦЕМ</a>
+                    <a href="https://t.me/VelikieDonateBot?start=pay_card" class="submit-btn" style="background:var(--gold); color:#000;">ОПЛАТИТЬ КАРТОЙ / ЧЕК</a>
                 </div>
             </div>
-            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
         </div>
 
         <div id="support" class="page">
@@ -228,8 +242,8 @@
                     <option value="🔴 ЖАЛОБА">🔴 Подать жалобу</option>
                     <option value="⚙️ ТЕХ">⚙️ Тех. вопрос</option>
                 </select>
-                <input type="text" id="sup-tg" placeholder="Твой ник в Telegram">
-                <textarea id="sup-msg" rows="5" placeholder="Текст обращения..."></textarea>
+                <input type="text" id="sup-tg" placeholder="Твой @username">
+                <textarea id="sup-msg" rows="5" placeholder="Опишите суть обращения..."></textarea>
                 <button class="submit-btn" onclick="sendToBot('КАНЦЕЛЯРИЯ')">ОТПРАВИТЬ</button>
             </div>
             <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
@@ -237,10 +251,10 @@
 
         <div id="admin" class="page">
             <div class="card">
-                <h2 style="text-align: center; color: var(--gold);">📝 АНКЕТА АДМИНА</h2>
+                <h2 style="text-align: center; color: var(--gold);">📝 СТАТЬ АДМИНОМ</h2>
                 <input type="text" id="adm-name" placeholder="Имя и возраст">
-                <input type="text" id="adm-tg" placeholder="Telegram @username">
-                <textarea id="adm-exp" rows="5" placeholder="1. Опыт? 2. Время на чат? 3. Почему ты?"></textarea>
+                <input type="text" id="adm-tg" placeholder="Твой @username">
+                <textarea id="adm-exp" rows="5" placeholder="1. Опыт администрирования?&#10;2. Сколько времени готов уделять?&#10;3. Почему мы должны выбрать тебя?"></textarea>
                 <button class="submit-btn" onclick="sendToBot('АНКЕТА')">ОТПРАВИТЬ АНКЕТУ</button>
             </div>
             <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
@@ -251,6 +265,7 @@
                 <a href="https://t.me/VelikieBs" class="btn">Основной Чат</a>
                 <a href="https://t.me/VelikieKatakom" class="btn" style="border-color: #e74c3c;">Катакомбы</a>
                 <a href="https://t.me/VelikieBs2" class="btn">Знакомства</a>
+                <a href="https://t.me/VelikieSoxry" class="btn">Великие Сохры 📸</a>
                 <a href="https://t.me/snosVelikie" class="btn" style="grid-column: span 2;">Канал Отзывов ⭐</a>
             </div>
             <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
@@ -276,7 +291,7 @@
                 const tg = document.getElementById('adm-tg').value;
                 const exp = document.getElementById('adm-exp').value;
                 if(!name || !tg || !exp) return alert("Заполни анкету!");
-                text = `📝 ЗАЯВКА АДМИН\n👤 Имя: ${name}\n🔗 Юзер: ${tg}\n📜 Инфо: ${exp}`;
+                text = `📝 ЗАЯВКА АДМИН\n👤 Имя: ${name}\n🔗 Юзер: ${tg}\n📜 Опыт: ${exp}`;
             }
 
             try {
@@ -285,9 +300,9 @@
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({chat_id: CHAT_ID, text: text})
                 });
-                alert("Успешно! Мы скоро свяжемся с тобой.");
+                alert("Успешно отправлено! Ожидай ответа.");
                 showPage('home');
-            } catch(e) { alert("Ошибка! Напиши в поддержку бота."); }
+            } catch(e) { alert("Ошибка отправки."); }
         }
 
         async function loadHallOfFame() {
