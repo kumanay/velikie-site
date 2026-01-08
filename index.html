@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ВЕЛИКИЕ | Сообщество</title>
+    <title>ВЕЛИКИЕ | Sapphire Edition 5.0</title>
     <style>
         :root {
             --bg: #030803;
-            --card-bg: rgba(7, 22, 12, 0.97);
+            --card-bg: rgba(7, 22, 12, 0.9);
             --primary: #2ecc71;
             --gold: #f1c40f;
+            --gold-glow: rgba(241, 196, 15, 0.4);
             --text: #e0f0e0;
         }
 
@@ -25,28 +26,44 @@
             align-items: center;
         }
 
-        #canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        #canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; filter: blur(50px); opacity: 0.7; }
         .container { width: 100%; max-width: 650px; padding: 20px; z-index: 1; }
 
-        header { text-align: center; padding: 30px 0; position: relative; }
-        .logo { font-size: 4rem; filter: drop-shadow(0 0 15px var(--primary)); }
-        h1 { font-size: 2.5rem; letter-spacing: 4px; color: var(--primary); text-transform: uppercase; }
+        header { text-align: center; padding: 35px 0; position: relative; }
+        .logo-img { font-size: 4.5rem; filter: drop-shadow(0 0 20px var(--gold)); animation: pulse 3s infinite; }
+        h1 { font-size: 2.5rem; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; margin: 10px 0; }
 
         .music-ctrl {
             position: absolute; top: 10px; right: 10px;
-            background: rgba(46, 204, 113, 0.2); border: 1px solid var(--primary);
-            color: var(--primary); padding: 8px; border-radius: 50%;
+            background: rgba(241, 196, 15, 0.1); border: 1px solid var(--gold);
+            color: var(--gold); padding: 8px; border-radius: 50%;
             cursor: pointer; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; transition: 0.3s; z-index: 10;
+            font-size: 1.2rem; transition: 0.3s; z-index: 100;
         }
 
         .card {
             background: var(--card-bg);
             border: 1px solid rgba(46, 204, 113, 0.2);
             padding: 25px; border-radius: 20px; margin-bottom: 20px;
-            backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(15px); box-shadow: 0 15px 35px rgba(0,0,0,0.6);
         }
 
+        /* ЗАЛ СЛАВЫ (ДИНАМИЧЕСКИЙ) */
+        .hall-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 15px; }
+        .member { text-align: center; padding: 10px; transition: 0.3s; }
+        .avatar-wrap {
+            position: relative; width: 75px; height: 75px; margin: 0 auto 10px;
+        }
+        .avatar-wrap::after {
+            content: ''; position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px;
+            border-radius: 50%; border: 2px solid var(--gold);
+            animation: rotate 8s linear infinite; box-shadow: 0 0 10px var(--gold-glow);
+        }
+        .avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #111; border: 2px solid transparent; }
+        .member b { display: block; color: #fff; font-size: 0.85rem; margin-top: 5px; }
+        .member span { display: block; color: var(--gold); font-size: 0.65rem; text-transform: uppercase; }
+
+        /* МЕНЮ */
         .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .btn {
             background: rgba(255,255,255,0.05); border: 1px solid var(--primary);
@@ -54,19 +71,16 @@
             text-align: center; transition: 0.3s; font-weight: bold;
             display: flex; flex-direction: column; align-items: center; gap: 8px; text-decoration: none;
         }
-        .btn:hover { background: var(--primary); color: #000; transform: translateY(-2px); }
-        .btn-main { grid-column: span 2; background: var(--primary); color: #000; font-size: 1.2rem; }
+        .btn:hover { background: var(--primary); color: #000; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3); }
+        .btn-main { grid-column: span 2; background: var(--gold); color: #000; font-size: 1.2rem; border: none; }
+        .btn-main:hover { background: #fff; box-shadow: 0 0 20px #fff; }
 
-        .hall-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 15px; }
-        .member { text-align: center; padding: 10px; border: 1px solid var(--gold); border-radius: 12px; font-size: 0.75rem; background: rgba(241, 196, 15, 0.05); }
-        .member b { display: block; color: var(--gold); font-size: 0.95rem; }
-
-        .full-rules { text-align: left; font-size: 1.05rem; line-height: 1.5; }
-        .rules-cat { color: var(--primary); font-weight: bold; margin-top: 15px; display: block; border-bottom: 1px solid #2ecc7144; padding-bottom: 3px; margin-bottom: 8px;}
+        .full-rules { text-align: left; font-size: 1rem; line-height: 1.5; }
+        .rules-cat { color: var(--primary); font-weight: bold; margin-top: 15px; display: block; border-bottom: 1px solid #2ecc7133; padding-bottom: 3px; margin-bottom: 8px;}
 
         .don-item { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #222; }
-        .don-title { color: var(--gold); font-size: 1.3rem; font-weight: bold; }
-        .don-list { margin-top: 8px; list-style: none; font-size: 0.95rem; opacity: 0.9; }
+        .don-title { color: var(--gold); font-size: 1.2rem; font-weight: bold; }
+        .don-list { margin-top: 8px; list-style: none; font-size: 0.9rem; opacity: 0.9; }
         .don-list li::before { content: "🔹 "; color: var(--gold); }
 
         select, input, textarea {
@@ -86,6 +100,8 @@
             border: 2px solid var(--primary); background: none; color: var(--primary); border-radius: 12px; font-weight: bold; cursor: pointer;
         }
 
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
@@ -101,17 +117,15 @@
         <div id="home" class="page active">
             <header>
                 <div class="music-ctrl" onclick="toggleMusic()" id="mus-icon">🔇</div>
-                <div class="logo">🗽</div>
+                <div class="logo-img">👑</div>
                 <h1>ВЕЛИКИЕ</h1>
-                <p style="opacity: 0.8;">Цифровая обитель сообщества</p>
+                <p style="opacity: 0.6; letter-spacing: 2px;">COMMUNITY HUB</p>
             </header>
 
             <div class="card">
-                <h3 style="color: var(--gold); text-align: center; text-transform: uppercase;">🏆 Зал Славы</h3>
-                <div class="hall-grid">
-                    <div class="member"><b>Димасик</b>@im_skywallker</div>
-                    <div class="member"><b>NIGHTMARE</b>Актив</div>
-                    <div class="member"><b>Соска</b>@Ezjik9</div>
+                <h3 style="color: var(--gold); text-align: center; text-transform: uppercase; letter-spacing: 2px;">🏆 Зал Славы</h3>
+                <div class="hall-grid" id="hall-of-fame">
+                    <p style="grid-column: span 3; text-align:center; opacity:0.5;">Свитки загружаются...</p>
                 </div>
             </div>
 
@@ -128,7 +142,6 @@
         <div id="support" class="page">
             <div class="card">
                 <h2 style="color: var(--primary); text-align: center;">📬 КАНЦЕЛЯРИЯ</h2>
-                <p style="font-size: 0.9rem; text-align: center; opacity: 0.7; margin-bottom: 10px;">Жалобы, идеи и предложения</p>
                 <select id="sup-type">
                     <option value="💡 ИДЕЯ">💡 Предложить идею</option>
                     <option value="🔴 ЖАЛОБА">🔴 Подать жалобу</option>
@@ -149,7 +162,7 @@
                 • <b>СПАМ/ФЛУД</b> (лесенки, повторы, гиф, видео) — мут 15 мин-1ч<br>
                 • <b>РЕКЛАМА</b> (любая) без согласования — БАН<br>
                 • Замещение владельца без разрешения — мут/бан<br>
-                • Контент 18+/16+ (<b>разрешён только после 22:00 МСК</b>)<br>
+                • Контент 18+/16+ (<b>разрешён после 22:00 МСК</b>)<br>
                 
                 <span class="rules-cat">📮 ТЕМЫ-ТАБУ:</span>
                 • Оскорбления нации, религия, политика — мут 10–35 мин<br>
@@ -159,8 +172,7 @@
 
                 <span class="rules-cat">📍 ПОРЯДОК:</span>
                 • Конфликты и провокации — мут 15 мин – 1 ч<br>
-                • Обход наказания — ×2 к сроку мута или бан<br>
-                • Ложный репорт — мут 15–25 мин.<br>
+                • Обход наказания — ×2 к сроку или бан<br>
                 • <b>4 предупреждения</b> — автоматический бан.
             </div>
             <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
@@ -171,7 +183,7 @@
                 <h2 style="color: var(--gold); text-align:center; margin-bottom:20px;">💎 ПОДДЕРЖКА ПРОЕКТА</h2>
                 
                 <div class="don-item">
-                    <div class="don-title">💛 Спонсор <span style="font-size:0.9rem; opacity:0.7;">(200 ₽ / 60 дней)</span></div>
+                    <div class="don-title">💛 Спонсор <span style="font-size:0.8rem; opacity:0.7;">(200 ₽ / 60 дней)</span></div>
                     <ul class="don-list">
                         <li>Уникальный префикс в чате</li>
                         <li>Приоритет в выдаче наказаний</li>
@@ -180,16 +192,16 @@
                 </div>
 
                 <div class="don-item">
-                    <div class="don-title">💛 Спонсор+ <span style="font-size:0.9rem; opacity:0.7;">(400 ₽ / 60 дней)</span></div>
+                    <div class="don-title">💛 Спонсор+ <span style="font-size:0.8rem; opacity:0.7;">(400 ₽ / 60 дней)</span></div>
                     <ul class="don-list">
                         <li>Префикс: Высший Спонсор</li>
                         <li>Доступ в секретный чат админов</li>
-                        <li>Возможность стать модератором чата</li>
+                        <li>Возможность стать модератором</li>
                     </ul>
                 </div>
 
                 <div class="don-item" style="border:none;">
-                    <div class="don-title">💎 Инвестор <span style="font-size:0.9rem; opacity:0.7;">(5000 ₽ / 1 год)</span></div>
+                    <div class="don-title">💎 Инвестор <span style="font-size:0.8rem; opacity:0.7;">(5000 ₽ / 1 год)</span></div>
                     <ul class="don-list">
                         <li>Полный иммунитет (банит только Владелец)</li>
                         <li>Управление трансляциями и закрепами</li>
@@ -197,12 +209,23 @@
                     </ul>
                 </div>
 
-                <div style="background: rgba(0,0,0,0.4); padding: 20px; border-radius: 15px; text-align: center; border: 1px dashed var(--gold); margin-bottom: 20px;">
+                <div style="background: rgba(0,0,0,0.4); padding: 15px; border-radius: 15px; text-align: center; border: 1px dashed var(--gold); margin-bottom: 20px;">
                     <p>Карта Сбербанка:</p>
-                    <b onclick="navigator.clipboard.writeText('2202205034828175'); alert('Скопировано!')" style="cursor: pointer; color: var(--gold); font-size: 1.4rem;">2202 2050 3482 8175</b>
+                    <b onclick="navigator.clipboard.writeText('2202205034828175'); alert('Скопировано!')" style="cursor: pointer; color: var(--gold); font-size: 1.2rem;">2202 2050 3482 8175</b>
                 </div>
 
                 <a href="https://t.me/KumaWelikiy" class="submit-btn" style="background: var(--gold);">ОТПРАВИТЬ ЧЕК В ЛС</a>
+            </div>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
+        </div>
+
+        <div id="chats" class="page">
+            <div class="menu-grid">
+                <a href="https://t.me/VelikieBs" class="btn">Основной Чат</a>
+                <a href="https://t.me/VelikieKatakom" class="btn" style="border-color: #e74c3c;">Катакомбы</a>
+                <a href="https://t.me/VelikieBs2" class="btn">Знакомства</a>
+                <a href="https://t.me/VelikieSohri" class="btn">Великие Сохры</a>
+                <a href="https://t.me/snosVelikie" class="btn" style="grid-column: span 2;">Канал Отзывов ⭐</a>
             </div>
             <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
         </div>
@@ -218,22 +241,39 @@
             <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
         </div>
 
-        <div id="chats" class="page">
-            <div class="menu-grid">
-                <a href="https://t.me/VelikieBs" class="btn">Основной Чат</a>
-                <a href="https://t.me/VelikieKatakom" class="btn" style="border-color: #e74c3c;">Катакомбы</a>
-                <a href="https://t.me/VelikieBs2" class="btn">Знакомства</a>
-                <a href="https://t.me/VelikieSohri" class="btn">Великие Сохры</a>
-                <a href="https://t.me/snosVelikie" class="btn" style="grid-column: span 2;">Канал Отзывов ⭐</a>
-            </div>
-            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
-        </div>
     </div>
 
     <script>
         const BOT_TOKEN = '8585491155:AAHzbeeEIPVSyI3Q3J5FfbxRLZ21GrioRnE';
         const CHAT_ID = '-1002207962264';
-        let lastSend = 0;
+        const SPREADSHEET_ID = '1T9OYL6gd_73llbvdg0zUw43hF0GauaauYF1DYWqWKNs';
+        const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv`;
+
+        async function loadHallOfFame() {
+            try {
+                const response = await fetch(SHEET_URL);
+                const data = await response.text();
+                const rows = data.split('\n');
+                const grid = document.getElementById('hall-of-fame');
+                grid.innerHTML = ''; 
+
+                rows.forEach(row => {
+                    const columns = row.split(',').map(c => c.replace(/"/g, ''));
+                    if (columns.length >= 3) {
+                        grid.innerHTML += `
+                            <div class="member">
+                                <div class="avatar-wrap"><img src="${columns[2]}" class="avatar"></div>
+                                <b>${columns[0]}</b>
+                                <span>${columns[1]}</span>
+                            </div>`;
+                    }
+                });
+            } catch (e) {
+                grid.innerHTML = '<p>Ошибка таблиц</p>';
+            }
+        }
+
+        loadHallOfFame();
 
         function showPage(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -244,57 +284,56 @@
         function toggleMusic() {
             const m = document.getElementById('bg-music');
             const icon = document.getElementById('mus-icon');
-            if(m.paused) { 
-                m.play().then(() => { icon.innerText = '🔊'; }).catch(e => { alert("Нажмите на экран еще раз и включите звук"); });
-            } else { 
-                m.pause(); icon.innerText = '🔇'; 
-            }
+            if(m.paused) { m.play(); icon.innerText = '🔊'; }
+            else { m.pause(); icon.innerText = '🔇'; }
         }
 
         async function sendSupport() {
-            if(Date.now() - lastSend < 300000) return alert("Подождите 5 минут.");
             const type = document.getElementById('sup-type').value;
             const user = document.getElementById('sup-tg').value;
             const msg = document.getElementById('sup-msg').value;
-            if(!user || !msg) return alert("Заполните поля.");
             const text = `📬 КАНЦЕЛЯРИЯ\n📌 Тип: ${type}\n✈️ Юзер: ${user}\n💬 Сообщение: ${msg}`;
-            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(text)}`;
-            const res = await fetch(url);
-            if(res.ok) { alert("Отправлено в штаб!"); lastSend = Date.now(); showPage('home'); }
+            await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(text)}`);
+            alert("Отправлено в штаб!"); showPage('home');
         }
 
         async function sendAdminForm() {
             const name = document.getElementById('adm-name').value;
             const user = document.getElementById('adm-tg').value;
             const exp = document.getElementById('adm-exp').value;
-            if(!name || !user || !exp) return alert("Заполните анкету полностью.");
             const text = `📝 ЗАЯВКА В АДМИНЫ\n👤 Имя: ${name}\n✈️ Юзер: ${user}\n📜 Опыт: ${exp}`;
-            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(text)}`;
-            const res = await fetch(url);
-            if(res.ok) { alert("Анкета отправлена!"); showPage('home'); }
+            await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(text)}`);
+            alert("Анкета отправлена!"); showPage('home');
         }
 
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
-        let particles = [];
+        let clouds = [];
         function init() {
             canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            particles = []; for(let i=0; i<60; i++) particles.push(new Particle());
+            clouds = []; for(let i=0; i<10; i++) clouds.push(new Cloud());
         }
-        class Particle {
+        class Cloud {
             constructor() {
                 this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2; this.speedX = Math.random() * 0.4 - 0.2; this.speedY = Math.random() * 0.4 - 0.2;
+                this.r = Math.random() * 250 + 150; this.dx = Math.random() * 0.4 - 0.2; this.dy = Math.random() * 0.4 - 0.2;
             }
             update() {
-                this.x += this.speedX; this.y += this.speedY;
-                if(this.x > canvas.width) this.x = 0; if(this.y > canvas.height) this.y = 0;
+                this.x += this.dx; this.y += this.dy;
+                if(this.x < 0 || this.x > canvas.width) this.dx *= -1;
+                if(this.y < 0 || this.y > canvas.height) this.dy *= -1;
             }
-            draw() { ctx.fillStyle = 'rgba(46, 204, 113, 0.3)'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill(); }
+            draw() {
+                let g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r);
+                g.addColorStop(0, 'rgba(46, 204, 113, 0.2)');
+                g.addColorStop(0.5, 'rgba(241, 196, 15, 0.15)');
+                g.addColorStop(1, 'transparent');
+                ctx.fillStyle = g; ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI*2); ctx.fill();
+            }
         }
         function animate() {
             ctx.clearRect(0,0,canvas.width, canvas.height);
-            particles.forEach(p => { p.update(); p.draw(); });
+            clouds.forEach(c => { c.update(); c.draw(); });
             requestAnimationFrame(animate);
         }
         window.addEventListener('resize', init); init(); animate();
