@@ -92,7 +92,9 @@
 <body>
 
     <canvas id="canvas"></canvas>
-    <audio id="bg-music" loop src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Kevin_MacLeod/Impact/Kevin_MacLeod_-_Impact_Andante.mp3"></audio>
+    <audio id="bg-music" loop preload="auto">
+        <source src="https://raw.githubusercontent.com/rafaelreis-hotmart/Audio-Sample-Files/main/sample-120s.mp3" type="audio/mpeg">
+    </audio>
 
     <div class="container">
         
@@ -126,16 +128,17 @@
         <div id="support" class="page">
             <div class="card">
                 <h2 style="color: var(--primary); text-align: center;">📬 КАНЦЕЛЯРИЯ</h2>
+                <p style="font-size: 0.9rem; text-align: center; opacity: 0.7; margin-bottom: 10px;">Жалобы, идеи и предложения</p>
                 <select id="sup-type">
                     <option value="💡 ИДЕЯ">💡 Предложить идею</option>
                     <option value="🔴 ЖАЛОБА">🔴 Подать жалобу</option>
                     <option value="⚙️ ТЕХ">⚙️ Тех. вопрос</option>
                 </select>
                 <input type="text" id="sup-tg" placeholder="Твой @username">
-                <textarea id="sup-msg" rows="5" placeholder="Опишите суть обращения..."></textarea>
+                <textarea id="sup-msg" rows="5" placeholder="Опишите суть обращения максимально подробно..."></textarea>
                 <button class="submit-btn" id="sup-btn" onclick="sendSupport()">ОТПРАВИТЬ В ШТАБ</button>
             </div>
-            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
         </div>
 
         <div id="rules" class="page">
@@ -150,15 +153,17 @@
                 
                 <span class="rules-cat">📮 ТЕМЫ-ТАБУ:</span>
                 • Оскорбления нации, религия, политика — мут 10–35 мин<br>
-                • Обсуждение наркотиков — мут 25 мин–24 ч / бан<br>
+                • Обсуждение наркотиков на серьёзной основе — мут 25 мин–24 ч / бан<br>
+                • Треш-контент — Мут/Пред / бан<br>
                 • <b>Пдф (пидофилия)</b> — бан навсегда.<br>
 
                 <span class="rules-cat">📍 ПОРЯДОК:</span>
                 • Конфликты и провокации — мут 15 мин – 1 ч<br>
-                • Обход наказания — ×2 к сроку или бан<br>
+                • Обход наказания — ×2 к сроку мута или бан<br>
+                • Ложный репорт — мут 15–25 мин.<br>
                 • <b>4 предупреждения</b> — автоматический бан.
             </div>
-            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
         </div>
 
         <div id="donate" class="page">
@@ -179,7 +184,7 @@
                     <ul class="don-list">
                         <li>Префикс: Высший Спонсор</li>
                         <li>Доступ в секретный чат админов</li>
-                        <li>Возможность стать модератором</li>
+                        <li>Возможность стать модератором чата</li>
                     </ul>
                 </div>
 
@@ -188,7 +193,7 @@
                     <ul class="don-list">
                         <li>Полный иммунитет (банит только Владелец)</li>
                         <li>Управление трансляциями и закрепами</li>
-                        <li>Реклама своих ресурсов</li>
+                        <li>Реклама своих ресурсов в закрепе</li>
                     </ul>
                 </div>
 
@@ -199,28 +204,29 @@
 
                 <a href="https://t.me/KumaWelikiy" class="submit-btn" style="background: var(--gold);">ОТПРАВИТЬ ЧЕК В ЛС</a>
             </div>
-            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
         </div>
 
         <div id="admin" class="page">
             <div class="card">
                 <h2 style="text-align: center;">📝 СТАТЬ АДМИНОМ</h2>
                 <input type="text" id="adm-name" placeholder="Ник и ваш возраст">
-                <input type="text" id="adm-tg" placeholder="Ваш @username">
-                <textarea id="adm-exp" rows="5" placeholder="Ваш опыт..."></textarea>
+                <input type="text" id="adm-tg" placeholder="Ваш @username в Telegram">
+                <textarea id="adm-exp" rows="5" placeholder="Ваш опыт администрирования..."></textarea>
                 <button class="submit-btn" onclick="sendAdminForm()">ОТПРАВИТЬ АНКЕТУ</button>
             </div>
-            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
         </div>
 
         <div id="chats" class="page">
             <div class="menu-grid">
-                <a href="https://t.me/VelikieBs" class="btn">Основной</a>
-                <a href="https://t.me/VelikieKatakom" class="btn">Катакомбы</a>
+                <a href="https://t.me/VelikieBs" class="btn">Основной Чат</a>
+                <a href="https://t.me/VelikieKatakom" class="btn" style="border-color: #e74c3c;">Катакомбы</a>
                 <a href="https://t.me/VelikieBs2" class="btn">Знакомства</a>
-                <a href="https://t.me/snosVelikie" class="btn" style="grid-column: span 2;">Отзывы ⭐</a>
+                <a href="https://t.me/VelikieSohri" class="btn">Великие Сохры</a>
+                <a href="https://t.me/snosVelikie" class="btn" style="grid-column: span 2;">Канал Отзывов ⭐</a>
             </div>
-            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
         </div>
     </div>
 
@@ -238,8 +244,11 @@
         function toggleMusic() {
             const m = document.getElementById('bg-music');
             const icon = document.getElementById('mus-icon');
-            if(m.paused) { m.play(); icon.innerText = '🔊'; }
-            else { m.pause(); icon.innerText = '🔇'; }
+            if(m.paused) { 
+                m.play().then(() => { icon.innerText = '🔊'; }).catch(e => { alert("Нажмите на экран еще раз и включите звук"); });
+            } else { 
+                m.pause(); icon.innerText = '🔇'; 
+            }
         }
 
         async function sendSupport() {
@@ -251,7 +260,7 @@
             const text = `📬 КАНЦЕЛЯРИЯ\n📌 Тип: ${type}\n✈️ Юзер: ${user}\n💬 Сообщение: ${msg}`;
             const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(text)}`;
             const res = await fetch(url);
-            if(res.ok) { alert("Отправлено!"); lastSend = Date.now(); showPage('home'); }
+            if(res.ok) { alert("Отправлено в штаб!"); lastSend = Date.now(); showPage('home'); }
         }
 
         async function sendAdminForm() {
