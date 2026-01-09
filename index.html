@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ВЕЛИКИЕ | V6.5 GOLD EDITION</title>
+    <title>ВЕЛИКИЕ | V6.5 GOLD EDITION FINAL</title>
     <style>
         :root {
             --bg: #030803;
@@ -101,21 +101,34 @@
         <div id="rules" class="page">
             <div class="card full-rules">
                 <h2 style="color: var(--gold); text-align:center; text-transform: uppercase;">🌋 ВЕЛИКИЕ ЗАКОНЫ</h2>
+                
                 <span class="rules-cat">🚫 ЗАПРЕЩЕНО:</span>
-                <div class="rule-item"><b>СПАМ:</b> лесенки, повторы сообщений, гифки, видео, флуд командами. (Мут 15 мин - 1ч)</div>
-                <div class="rule-item"><b>РЕКЛАМА:</b> любая реклама без согласования. (Мут-Бан)</div>
-                <div class="rule-item"><b>ЗАМЕЩЕНИЕ:</b> попытка замещения владельца. (Мут-Бан)</div>
-                <div class="rule-item"><b>КОНТЕНТ 18+:</b> только после 22:00 МСК. Запрещены: зоофилия, насилие, резня. (Мут-Пред)</div>
-                <span class="rules-cat">📮 ТЕМЫ-ТАБУ:</span>
-                <div class="rule-item">Оскорбления нации, религия, политика. (Мут 10–35 мин)</div>
+                <div class="rule-item"><b>СПАМ:</b> лесенки, повторяющиеся символы, гифки, видео, флуд командами и т.д. (Мут 15 мин - 1ч)</div>
+                <div class="rule-item"><b>РЕКЛАМА:</b> любая без согласования с владельцем запрещена. (Мут-Бан)</div>
+                <div class="rule-item"><b>ЗАМЕЩЕНИЕ:</b> попытка замещения владельца без разрешения. (Мут-Бан)</div>
+                <div class="rule-item"><b>КОНТЕНТ 18+ 16+:</b> разрешён после 22:00 по МСК. <b>ВСЕГДА ЗАПРЕЩЕНЫ:</b> Детский контент, зоофилия, насилие, резня и т.п. (Мут-Пред)</div>
+
+                <span class="rules-cat">📮 ЗАПРЕЩЁННЫЕ ТЕМЫ:</span>
+                <div class="rule-item">Оскорбления нации, религия, политика, дипломатия. (Мут 10–35 мин)</div>
                 <div class="rule-item">Обсуждение наркотиков на серьезной основе. (Мут 25 мин–24 ч / Пред / Бан)</div>
-                <div class="rule-item">Треш-контент. (Мут / Пред / Бан)</div>
+                <div class="rule-item">Треш-контент (Мут / Пред / Бан)</div>
+
                 <span class="rules-cat">🔞 ПДФ (ПЕДОФИЛИЯ):</span>
                 <div class="rule-item">Наказываются любые склонности к пдф. (Пред-Бан)</div>
                 <div class="rule-item">Темы, относящиеся к пдф по факту. (Мут / Пред)</div>
+                <p style="font-size: 0.8rem; margin: 5px 0;">* При просьбе удалить такой контент — удалите сразу, мы заботимся о комфорте.</p>
+
+                <span class="rules-cat">⚠️ ПОРЯДОК:</span>
+                <div class="rule-item">Конфликты, провокации, оскорбления, ссоры. (Мут 15 мин – 1 ч / Пред / Бан)</div>
+                <div class="rule-item">Обход наказания любыми путями. (×2 к сроку / Бан виновнику)</div>
+                <div class="rule-item">При ложном репорте. (Мут на 15-25 мин)</div>
+
                 <span class="rules-cat">⚙️ ДОПОЛНИТЕЛЬНО:</span>
+                • Наказание без предупреждения при повторных нарушениях.<br>
                 • 4 предупреждения — автоматический бан.<br>
-                • Бунт против решения администрации — бан на неделю.
+                • Решение владельца/зама/старших — закон.<br>
+                • Бунт против решения администрации — бан на неделю.<br>
+                • Однотипные нарушения: 3 раза мут, далее мут + пред.
             </div>
             <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
         </div>
@@ -189,23 +202,13 @@
             <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
         </div>
 
-        <div id="admin" class="page">
-            <div class="card">
-                <h2 style="text-align: center; color: var(--gold);">📝 АНКЕТА АДМИНА</h2>
-                <input type="text" id="adm-name" placeholder="Имя и возраст">
-                <input type="text" id="adm-tg" placeholder="Твой @username">
-                <textarea id="adm-exp" rows="5" placeholder="Опыт, время, почему ты?"></textarea>
-                <button class="submit-btn" onclick="sendToBot('АНКЕТА')">ОТПРАВИТЬ</button>
-            </div>
-            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
-        </div>
-
         <div id="support" class="page">
             <div class="card">
                 <h2 style="color: var(--primary); text-align: center;">📬 КАНЦЕЛЯРИЯ</h2>
                 <select id="sup-type">
                     <option value="💡 ИДЕЯ">💡 Предложить идею</option>
                     <option value="🔴 ЖАЛОБА">🔴 Подать жалобу</option>
+                    <option value="⚙️ ТЕХ. ВОПРОС">⚙️ Технический вопрос</option>
                 </select>
                 <input type="text" id="sup-tg" placeholder="Твой @username">
                 <textarea id="sup-msg" rows="5" placeholder="Текст обращения..."></textarea>
@@ -217,9 +220,21 @@
         <div id="chats" class="page">
             <div class="menu-grid">
                 <a href="https://t.me/VelikieBs" class="btn">Основной Чат</a>
+                <a href="https://t.me/VelikieBs2" class="btn" style="border-color: var(--gold);">Чат Знакомств</a>
                 <a href="https://t.me/VelikieKatakom" class="btn" style="border-color: var(--danger);">Катакомбы</a>
-                <a href="https://t.me/VelikieSoxry" class="btn">Великие Сохры 📸</a>
+                <a href="https://t.me/VelikieSohri" class="btn">Великие Сохры 📸</a>
                 <a href="https://t.me/snosVelikie" class="btn" style="grid-column: span 2;">Канал Отзывов ⭐</a>
+            </div>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
+        </div>
+
+        <div id="admin" class="page">
+            <div class="card">
+                <h2 style="text-align: center; color: var(--gold);">📝 АНКЕТА АДМИНА</h2>
+                <input type="text" id="adm-name" placeholder="Имя и возраст">
+                <input type="text" id="adm-tg" placeholder="Твой @username">
+                <textarea id="adm-exp" rows="5" placeholder="Опыт, время, почему ты?"></textarea>
+                <button class="submit-btn" onclick="sendToBot('АНКЕТА')">ОТПРАВИТЬ</button>
             </div>
             <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
         </div>
@@ -263,12 +278,13 @@
                 grid.innerHTML = '';
                 rows.forEach(row => {
                     const cols = row.split(',').map(c => c.replace(/"/g, '').trim());
-                    if(cols[0]) {
+                    // Димасик и другие появятся, если их ID/имя есть в 1-й колонке таблицы
+                    if(cols[0] && cols[0].length > 1) { 
                         const img = `https://wsrv.nl/?url=${encodeURIComponent(cols[2])}&w=150&h=150&fit=cover&mask=circle`;
                         grid.innerHTML += `<div class="member"><div class="avatar-wrap"><img src="${img}" class="avatar"></div><b>${cols[0]}</b><span>${cols[1]}</span></div>`;
                     }
                 });
-            } catch(e) {}
+            } catch(e) { console.log("Hall of Fame Error"); }
         }
         loadHallOfFame();
 
