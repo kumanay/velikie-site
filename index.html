@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ВЕЛИКИЕ | V6.4 Final Fixed</title>
+    <title>ВЕЛИКИЕ | V6.5 GOLD EDITION</title>
     <style>
         :root {
             --bg: #030803;
@@ -17,64 +17,33 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; display: flex; flex-direction: column; align-items: center; }
         #canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; filter: blur(50px); opacity: 0.7; }
         .container { width: 100%; max-width: 650px; padding: 20px; z-index: 1; }
 
         header { text-align: center; padding: 35px 0; position: relative; }
         .logo-img { font-size: 4.5rem; filter: drop-shadow(0 0 20px var(--gold)); animation: pulse 3s infinite; }
         h1 { font-size: 2.5rem; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; margin: 10px 0; }
-
-        .music-ctrl {
-            position: absolute; top: 10px; right: 10px;
-            background: rgba(241, 196, 15, 0.1); border: 1px solid var(--gold);
-            color: var(--gold); padding: 8px; border-radius: 50%;
-            cursor: pointer; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; transition: 0.3s; z-index: 100;
+        
+        .chat-stats { 
+            background: rgba(46, 204, 113, 0.1); border: 1px solid var(--primary);
+            padding: 8px 15px; border-radius: 50px; display: inline-block;
+            font-size: 0.85rem; color: var(--primary); font-weight: bold; margin-bottom: 15px;
+            box-shadow: 0 0 15px rgba(46, 204, 113, 0.2);
         }
 
-        .card {
-            background: var(--card-bg);
-            border: 1px solid rgba(46, 204, 113, 0.2);
-            padding: 25px; border-radius: 20px; margin-bottom: 20px;
-            backdrop-filter: blur(15px); box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-        }
-
-        .hall-grid { 
-            display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 10px; 
-            margin-top: 15px; 
-            width: 100%;
-        }
-        .member { text-align: center; padding: 5px; min-width: 0; }
+        .card { background: var(--card-bg); border: 1px solid rgba(46, 204, 113, 0.2); padding: 25px; border-radius: 20px; margin-bottom: 20px; backdrop-filter: blur(15px); box-shadow: 0 15px 35px rgba(0,0,0,0.6); }
+        
+        .hall-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
+        .member { text-align: center; padding: 5px; }
         .avatar-wrap { position: relative; width: 65px; height: 65px; margin: 0 auto 10px; }
-        .avatar-wrap::after {
-            content: ''; position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px;
-            border-radius: 50%; border: 2px solid var(--gold);
-            animation: rotate 8s linear infinite; box-shadow: 0 0 10px var(--gold-glow);
-        }
+        .avatar-wrap::after { content: ''; position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px; border-radius: 50%; border: 2px solid var(--gold); animation: rotate 8s linear infinite; box-shadow: 0 0 10px var(--gold-glow); }
         .avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #111; }
         .member b { display: block; color: #fff; font-size: 0.75rem; margin-top: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .member span { display: block; color: var(--gold); font-size: 0.6rem; text-transform: uppercase; }
 
         .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .btn {
-            background: rgba(255,255,255,0.05); border: 1px solid var(--primary);
-            color: white; padding: 18px; border-radius: 12px; cursor: pointer;
-            text-align: center; transition: 0.3s; font-weight: bold;
-            display: flex; flex-direction: column; align-items: center; gap: 8px; text-decoration: none;
-        }
+        .btn { background: rgba(255,255,255,0.05); border: 1px solid var(--primary); color: white; padding: 18px; border-radius: 12px; cursor: pointer; text-align: center; transition: 0.3s; font-weight: bold; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 8px; }
         .btn:hover { background: var(--primary); color: #000; transform: translateY(-3px); }
         .btn-main { grid-column: span 2; background: var(--gold); color: #000; font-size: 1.2rem; border: none; }
 
@@ -82,7 +51,7 @@
         .rules-cat { color: var(--gold); font-weight: bold; margin-top: 18px; display: block; border-bottom: 1px solid rgba(241,196,15,0.3); padding-bottom: 3px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;}
         .rule-item { margin-bottom: 8px; padding-left: 10px; border-left: 2px solid var(--primary); }
 
-        .don-card { margin-bottom: 25px; border-bottom: 1px solid #333; padding-bottom: 20px;}
+        .don-card { margin-bottom: 25px; border-bottom: 1px solid #333; padding-bottom: 20px; }
         .don-header { color: var(--gold); font-size: 1.2rem; font-weight: bold; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
         .don-list { list-style: none; padding-left: 5px; margin-bottom: 15px; }
         .don-list li { margin-bottom: 7px; font-size: 0.9rem; opacity: 0.9; display: flex; align-items: flex-start; gap: 8px; }
@@ -92,27 +61,10 @@
         .btn-pay { padding: 14px; border-radius: 12px; text-decoration: none; font-size: 0.9rem; font-weight: bold; text-align: center; transition: 0.3s; cursor: pointer;}
         .btn-stars { background: #0088cc; color: white; border: none; }
         .btn-card { border: 1px solid var(--gold); color: var(--gold); background: none; }
-        .btn-pay:hover { opacity: 0.8; transform: translateY(-2px); }
 
-        select, input, textarea {
-            width: 100%; padding: 16px; margin: 12px 0;
-            background: var(--input-bg); border: 1px solid #444; border-left: 3px solid var(--primary);
-            color: white; border-radius: 12px; font-size: 1.05rem; outline: none;
-            font-family: inherit;
-        }
-
-        .submit-btn {
-            width: 100%; background: var(--primary); color: black; border: none; 
-            padding: 18px; border-radius: 12px; font-weight: bold; cursor: pointer; 
-            font-size: 1.1rem; text-transform: uppercase; transition: 0.3s;
-            text-align: center; text-decoration: none; display: block;
-        }
-        .submit-btn:hover { transform: scale(1.02); box-shadow: 0 0 20px rgba(46, 204, 113, 0.4); }
-
-        .back-btn {
-            display: block; width: 100%; margin-top: 25px; padding: 15px;
-            border: 2px solid var(--primary); background: none; color: var(--primary); border-radius: 12px; font-weight: bold; cursor: pointer;
-        }
+        input, textarea, select { width: 100%; padding: 16px; margin: 12px 0; background: var(--input-bg); border: 1px solid #444; border-left: 3px solid var(--primary); color: white; border-radius: 12px; outline: none; font-family: inherit; }
+        .submit-btn { width: 100%; background: var(--primary); color: black; border: none; padding: 18px; border-radius: 12px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        .back-btn { display: block; width: 100%; margin-top: 25px; padding: 15px; border: 2px solid var(--primary); background: none; color: var(--primary); border-radius: 12px; font-weight: bold; cursor: pointer; }
 
         .page { display: none; animation: fadeIn 0.4s ease forwards; }
         .page.active { display: block; }
@@ -123,35 +75,24 @@
     </style>
 </head>
 <body>
-
     <canvas id="canvas"></canvas>
-    <audio id="bg-music" loop preload="auto">
-        <source src="https://github.com/ecemgo/mini-samples-great-tricks/raw/main/song-list/Kordhell-Murder-In-My-Mind.mp3" type="audio/mpeg">
-    </audio>
-
     <div class="container">
         
         <div id="home" class="page active">
             <header>
-                <div class="music-ctrl" onclick="toggleMusic()" id="mus-icon">🔇</div>
                 <div class="logo-img">👑</div>
                 <h1>ВЕЛИКИЕ</h1>
-                <p style="opacity: 0.6; letter-spacing: 2px;">COMMUNITY HUB</p>
+                <div class="chat-stats" id="chat-count">🔥 В ЧАТЕ: 1,240 УЧАСТНИКОВ</div>
             </header>
-
             <div class="card">
-                <h3 style="color: var(--gold); text-align: center; text-transform: uppercase; letter-spacing: 2px;">🏆 Зал Славы</h3>
-                <div class="hall-grid" id="hall-of-fame">
-                    <p style="grid-column: span 3; text-align:center; opacity:0.5;">Загрузка легенд...</p>
-                </div>
+                <h3 style="color: var(--gold); text-align: center; text-transform: uppercase;">🏆 Зал Славы</h3>
+                <div class="hall-grid" id="hall-of-fame">Загрузка легенд...</div>
             </div>
-
             <div class="menu-grid">
                 <a href="https://t.me/VelikieBs" class="btn btn-main">🚀 ВОЙТИ В ЧАТ</a>
                 <div class="btn" onclick="showPage('rules')">📜 Законы</div>
                 <div class="btn" onclick="showPage('donate')">💎 Донаты</div>
                 <div class="btn" onclick="showPage('admin')">📝 Анкета</div>
-                <div class="btn" onclick="showPage('amnesty')" style="border-color: var(--danger); color: var(--danger);">⚖️ Амнистия</div>
                 <div class="btn" onclick="showPage('support')">📬 Канцелярия</div>
                 <div class="btn" onclick="showPage('chats')" style="grid-column: span 2;">🔗 Наши Ресурсы</div>
             </div>
@@ -160,44 +101,28 @@
         <div id="rules" class="page">
             <div class="card full-rules">
                 <h2 style="color: var(--gold); text-align:center; text-transform: uppercase;">🌋 ВЕЛИКИЕ ЗАКОНЫ</h2>
-                
                 <span class="rules-cat">🚫 ЗАПРЕЩЕНО:</span>
-                <div class="rule-item"><b>СПАМ:</b> лесенки, повторы сообщений, гифки, видео, флуд командами и т.д. (Мут от 15 мин до 1 часа)</div>
-                <div class="rule-item"><b>РЕКЛАМА:</b> любая реклама сторонних ресурсов без согласования (Мут или Бан)</div>
-                <div class="rule-item"><b>ЗАМЕЩЕНИЕ:</b> попытка замещения владельца или администрации без разрешения (Мут или Бан)</div>
-                <div class="rule-item"><b>КОНТЕНТ 18+/16+:</b> разрешен только после 22:00 МСК. Запрещены: детский контент, зоофилия, насилие, резня (Мут или Предупреждение)</div>
-
+                <div class="rule-item"><b>СПАМ:</b> лесенки, повторы сообщений, гифки, видео, флуд командами. (Мут 15 мин - 1ч)</div>
+                <div class="rule-item"><b>РЕКЛАМА:</b> любая реклама без согласования. (Мут-Бан)</div>
+                <div class="rule-item"><b>ЗАМЕЩЕНИЕ:</b> попытка замещения владельца. (Мут-Бан)</div>
+                <div class="rule-item"><b>КОНТЕНТ 18+:</b> только после 22:00 МСК. Запрещены: зоофилия, насилие, резня. (Мут-Пред)</div>
                 <span class="rules-cat">📮 ТЕМЫ-ТАБУ:</span>
-                <div class="rule-item">Оскорбления нации, обсуждение религии, политика, дипломатические конфликты (Мут 10–35 мин)</div>
-                <div class="rule-item">Обсуждение наркотиков на серьезной основе (Мут от 25 мин до 24 ч / Пред / Бан)</div>
-                <div class="rule-item">Треш-контент, шок-контент (Мут / Пред / Бан)</div>
-
+                <div class="rule-item">Оскорбления нации, религия, политика. (Мут 10–35 мин)</div>
+                <div class="rule-item">Обсуждение наркотиков на серьезной основе. (Мут 25 мин–24 ч / Пред / Бан)</div>
+                <div class="rule-item">Треш-контент. (Мут / Пред / Бан)</div>
                 <span class="rules-cat">🔞 ПДФ (ПЕДОФИЛИЯ):</span>
-                <div class="rule-item">Строго наказываются любые склонности к пдф (Пред или Бан)</div>
-                <div class="rule-item">Темы, относящиеся к пдф по факту обсуждения (Мут / Пред)</div>
-
+                <div class="rule-item">Наказываются любые склонности к пдф. (Пред-Бан)</div>
+                <div class="rule-item">Темы, относящиеся к пдф по факту. (Мут / Пред)</div>
                 <span class="rules-cat">⚙️ ДОПОЛНИТЕЛЬНО:</span>
-                • 4 предупреждения (варна) — автоматический бан.<br>
-                • Бунт против решения администрации — бан на неделю.<br>
-                • Решение владельца не обсуждается.
-            </div>
-            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
-        </div>
-
-        <div id="amnesty" class="page">
-            <div class="card">
-                <h2 style="color: var(--danger); text-align: center;">⚖️ АМНИСТИЯ</h2>
-                <p style="text-align: center; font-size: 0.8rem; margin-bottom: 10px; opacity: 0.7;">Подайте заявку на пересмотр бана</p>
-                <input type="text" id="amn-tg" placeholder="Твой @username">
-                <textarea id="amn-reason" rows="5" placeholder="1. За что получили бан?&#10;2. Почему мы должны вас разбанить?&#10;3. Осознали ли вы вину?"></textarea>
-                <button class="submit-btn" style="background: var(--danger); color: white;" onclick="sendToBot('АМНИСТИЯ')">ОТПРАВИТЬ ЗАЯВКУ</button>
+                • 4 предупреждения — автоматический бан.<br>
+                • Бунт против решения администрации — бан на неделю.
             </div>
             <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
         </div>
 
         <div id="donate" class="page">
             <div class="card">
-                <h2 style="color: var(--gold); text-align:center; margin-bottom:25px; text-transform: uppercase;">💎 ПОДДЕРЖКА ПРОЕКТА</h2>
+                <h2 style="color: var(--gold); text-align:center; margin-bottom:25px;">💎 ПОДДЕРЖКА</h2>
                 
                 <div class="don-card">
                     <div class="don-header">💛 Спонсор (200 ₽ / 60 дней)</div>
@@ -207,8 +132,8 @@
                         <li>Вы можете спамить чаще</li>
                     </ul>
                     <div class="don-btns">
-                        <a href="https://t.me/VelikieDonateBot?start=buy_sponsor" class="btn-pay btn-stars">STARS (200 ⭐)</a>
-                        <a href="https://t.me/VelikieDonateBot?start=pay_card" class="btn-pay btn-card">КАРТОЙ / ЧЕК</a>
+                        <a href="https://t.me/VelikieDonateBot?start=buy_sponsor" class="btn-pay btn-stars">200 ⭐</a>
+                        <a href="https://t.me/VelikieDonateBot?start=pay_card" class="btn-pay btn-card">КАРТОЙ</a>
                     </div>
                 </div>
 
@@ -218,41 +143,61 @@
                         <li>Вас может банить только Хелпер зам и выше</li>
                         <li>Префикс "Высший спонсор"</li>
                         <li>Полный доступ в закрытый чат админов</li>
-                        <li>Возможность предлагать идеи</li>
                         <li>Право подать на модератора в любой момент</li>
                     </ul>
                     <div class="don-btns">
-                        <a href="https://t.me/VelikieDonateBot?start=buy_sponsor_plus" class="btn-pay btn-stars">STARS (400 ⭐)</a>
-                        <a href="https://t.me/VelikieDonateBot?start=pay_card" class="btn-pay btn-card">КАРТОЙ / ЧЕК</a>
+                        <a href="https://t.me/VelikieDonateBot?start=buy_sponsor_plus" class="btn-pay btn-stars">400 ⭐</a>
+                        <a href="https://t.me/VelikieDonateBot?start=pay_card" class="btn-pay btn-card">КАРТОЙ</a>
                     </div>
                 </div>
 
                 <div class="don-card">
-                    <div class="don-header">⚖️ Амнистия (200 ₽ / Моментально)</div>
+                    <div class="don-header">⚖️ Амнистия (300 ₽)</div>
                     <ul class="don-list">
-                        <li>Снятие всех варнов</li>
-                        <li>Полный разбан во всех ресурсах</li>
-                        <li>Второй шанс без очереди</li>
+                        <li>Разбан по согласованию с владельцем</li>
+                        <li>Амнистия не спасает от повторных банов</li>
+                        <li>Можно купить только 1 раз</li>
                     </ul>
                     <div class="don-btns">
-                        <a href="https://t.me/VelikieDonateBot?start=buy_unban" class="btn-pay btn-stars">STARS (200 ⭐)</a>
-                        <a href="https://t.me/VelikieDonateBot?start=pay_card" class="btn-pay btn-card">КАРТОЙ / ЧЕК</a>
+                        <a href="https://t.me/VelikieDonateBot?start=buy_unban" class="btn-pay btn-stars">250 ⭐</a>
+                        <a href="https://t.me/VelikieDonateBot?start=pay_card" class="btn-pay btn-card">КАРТОЙ</a>
                     </div>
                 </div>
 
                 <div class="don-card">
+                    <div class="don-header">💬 Временный Префикс (70 ₽)</div>
+                    <ul class="don-list">
+                        <li>Если у вас спамблок, но хотите общаться</li>
+                        <li>Отображается в чате при каждом сообщении</li>
+                    </ul>
+                    <div class="don-btns">
+                        <a href="https://t.me/VelikieDonateBot?start=buy_prefix" class="btn-pay btn-stars">50 ⭐</a>
+                        <a href="https://t.me/VelikieDonateBot?start=pay_card" class="btn-pay btn-card">КАРТОЙ</a>
+                    </div>
+                </div>
+
+                <div class="don-card" style="border:none;">
                     <div class="don-header">💎 Инвестор (5000 ₽ / 1 ГОД)</div>
                     <ul class="don-list">
                         <li>Вас может банить только владелец</li>
                         <li>Полный иммунитет от мутов и варнов</li>
                         <li>Право удалять любые сообщения в чате</li>
-                        <li>Реклама ваших каналов/соцсетей</li>
-                        <li>Право закреплять свои сообщения</li>
                     </ul>
-                    <a href="https://t.me/VelikieDonateBot?start=pay_card" class="submit-btn" style="background:var(--gold); color:#000;">ОПЛАТИТЬ КАРТОЙ / ЧЕК</a>
+                    <a href="https://t.me/VelikieDonateBot?start=pay_card" class="submit-btn" style="background:var(--gold); text-decoration:none; display:block; text-align:center;">ОПЛАТИТЬ КАРТОЙ</a>
                 </div>
             </div>
-            <button class="back-btn" onclick="showPage('home')">← НАЗАД В МЕНЮ</button>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
+        </div>
+
+        <div id="admin" class="page">
+            <div class="card">
+                <h2 style="text-align: center; color: var(--gold);">📝 АНКЕТА АДМИНА</h2>
+                <input type="text" id="adm-name" placeholder="Имя и возраст">
+                <input type="text" id="adm-tg" placeholder="Твой @username">
+                <textarea id="adm-exp" rows="5" placeholder="Опыт, время, почему ты?"></textarea>
+                <button class="submit-btn" onclick="sendToBot('АНКЕТА')">ОТПРАВИТЬ</button>
+            </div>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
         </div>
 
         <div id="support" class="page">
@@ -261,22 +206,10 @@
                 <select id="sup-type">
                     <option value="💡 ИДЕЯ">💡 Предложить идею</option>
                     <option value="🔴 ЖАЛОБА">🔴 Подать жалобу</option>
-                    <option value="⚙️ ТЕХ">⚙️ Тех. вопрос</option>
                 </select>
                 <input type="text" id="sup-tg" placeholder="Твой @username">
-                <textarea id="sup-msg" rows="5" placeholder="Опишите суть обращения..."></textarea>
+                <textarea id="sup-msg" rows="5" placeholder="Текст обращения..."></textarea>
                 <button class="submit-btn" onclick="sendToBot('КАНЦЕЛЯРИЯ')">ОТПРАВИТЬ</button>
-            </div>
-            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
-        </div>
-
-        <div id="admin" class="page">
-            <div class="card">
-                <h2 style="text-align: center; color: var(--gold);">📝 СТАТЬ АДМИНОМ</h2>
-                <input type="text" id="adm-name" placeholder="Имя и возраст">
-                <input type="text" id="adm-tg" placeholder="Твой @username">
-                <textarea id="adm-exp" rows="5" placeholder="Опишите ваш опыт..."></textarea>
-                <button class="submit-btn" onclick="sendToBot('АНКЕТА')">ОТПРАВИТЬ АНКЕТУ</button>
             </div>
             <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
         </div>
@@ -284,8 +217,7 @@
         <div id="chats" class="page">
             <div class="menu-grid">
                 <a href="https://t.me/VelikieBs" class="btn">Основной Чат</a>
-                <a href="https://t.me/VelikieKatakom" class="btn" style="border-color: #e74c3c;">Катакомбы</a>
-                <a href="https://t.me/VelikieBs2" class="btn">Знакомства</a>
+                <a href="https://t.me/VelikieKatakom" class="btn" style="border-color: var(--danger);">Катакомбы</a>
                 <a href="https://t.me/VelikieSoxry" class="btn">Великие Сохры 📸</a>
                 <a href="https://t.me/snosVelikie" class="btn" style="grid-column: span 2;">Канал Отзывов ⭐</a>
             </div>
@@ -301,65 +233,49 @@
 
         async function sendToBot(category) {
             let text = "";
-            if(category === 'КАНЦЕЛЯРИЯ') {
-                const type = document.getElementById('sup-type').value;
-                const tg = document.getElementById('sup-tg').value;
-                const msg = document.getElementById('sup-msg').value;
-                if(!tg || !msg) return alert("Заполни все поля!");
-                text = `📬 ${type}\n👤 От: ${tg}\n💬 Текст: ${msg}`;
-            } else if(category === 'АМНИСТИЯ') {
-                const tg = document.getElementById('amn-tg').value;
-                const reason = document.getElementById('amn-reason').value;
-                if(!tg || !reason) return alert("Заполни форму!");
-                text = `⚖️ ЗАЯВКА НА РАЗБАН\n👤 Юзер: ${tg}\n📜 Причина: ${reason}`;
+            if(category === 'АНКЕТА') {
+                const n = document.getElementById('adm-name').value;
+                const t = document.getElementById('adm-tg').value;
+                const e = document.getElementById('adm-exp').value;
+                text = `📝 АНКЕТА\n👤 Имя: ${n}\n🔗 Юзер: ${t}\n📜 Опыт: ${e}`;
             } else {
-                const name = document.getElementById('adm-name').value;
-                const tg = document.getElementById('adm-tg').value;
-                const exp = document.getElementById('adm-exp').value;
-                if(!name || !tg || !exp) return alert("Заполни анкету!");
-                text = `📝 ЗАЯВКА АДМИН\n👤 Имя: ${name}\n🔗 Юзер: ${tg}\n📜 Опыт: ${exp}`;
+                const type = document.getElementById('sup-type').value;
+                const t = document.getElementById('sup-tg').value;
+                const m = document.getElementById('sup-msg').value;
+                text = `📬 ${type}\n👤 От: ${t}\n💬 Текст: ${m}`;
             }
-
             try {
                 await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({chat_id: CHAT_ID, text: text})
                 });
-                alert("Успешно отправлено!");
-                showPage('home');
-            } catch(e) { alert("Ошибка отправки."); }
+                alert("Успешно!"); showPage('home');
+            } catch(e) { alert("Ошибка!"); }
         }
 
         async function loadHallOfFame() {
             try {
-                const response = await fetch(SHEET_URL);
-                const data = await response.text();
-                const rows = data.split('\n');
+                const res = await fetch(SHEET_URL);
+                const data = await res.text();
+                const rows = data.split('\n').slice(1);
                 const grid = document.getElementById('hall-of-fame');
-                grid.innerHTML = ''; 
+                grid.innerHTML = '';
                 rows.forEach(row => {
-                    const columns = row.split(',').map(c => c.replace(/"/g, '').trim());
-                    if (columns.length >= 3 && columns[0] !== "" && columns[0] !== "Имя") {
-                        const safePhoto = `https://wsrv.nl/?url=${encodeURIComponent(columns[2])}&w=150&h=150&fit=cover&mask=circle`;
-                        grid.innerHTML += `<div class="member"><div class="avatar-wrap"><img src="${safePhoto}" class="avatar"></div><b>${columns[0]}</b><span>${columns[1]}</span></div>`;
+                    const cols = row.split(',').map(c => c.replace(/"/g, '').trim());
+                    if(cols[0]) {
+                        const img = `https://wsrv.nl/?url=${encodeURIComponent(cols[2])}&w=150&h=150&fit=cover&mask=circle`;
+                        grid.innerHTML += `<div class="member"><div class="avatar-wrap"><img src="${img}" class="avatar"></div><b>${cols[0]}</b><span>${cols[1]}</span></div>`;
                     }
                 });
-            } catch (e) { }
+            } catch(e) {}
         }
         loadHallOfFame();
 
-        function showPage(id) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        }
-
-        function toggleMusic() {
-            const m = document.getElementById('bg-music');
-            const icon = document.getElementById('mus-icon');
-            if(m.paused) { m.play(); icon.innerText = '🔊'; }
-            else { m.pause(); icon.innerText = '🔇'; }
+        function showPage(p) {
+            document.querySelectorAll('.page').forEach(div => div.classList.remove('active'));
+            document.getElementById(p).classList.add('active');
+            window.scrollTo(0,0);
         }
 
         const canvas = document.getElementById('canvas');
@@ -367,7 +283,7 @@
         let clouds = [];
         function init() {
             canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            clouds = []; for(let i=0; i<10; i++) clouds.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*250+150, dx: Math.random()*0.4-0.2, dy: Math.random()*0.4-0.2});
+            clouds = []; for(let i=0; i<8; i++) clouds.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*200+100, dx: Math.random()*0.4-0.2, dy: Math.random()*0.4-0.2});
         }
         function animate() {
             ctx.clearRect(0,0,canvas.width, canvas.height);
@@ -375,7 +291,7 @@
                 c.x += c.dx; c.y += c.dy;
                 if(c.x<0 || c.x>canvas.width) c.dx*=-1; if(c.y<0 || c.y>canvas.height) c.dy*=-1;
                 let g = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, c.r);
-                g.addColorStop(0, 'rgba(46, 204, 113, 0.15)'); g.addColorStop(0.5, 'rgba(241, 196, 15, 0.1)'); g.addColorStop(1, 'transparent');
+                g.addColorStop(0, 'rgba(46, 204, 113, 0.15)'); g.addColorStop(1, 'transparent');
                 ctx.fillStyle = g; ctx.beginPath(); ctx.arc(c.x, c.y, c.r, 0, Math.PI*2); ctx.fill();
             });
             requestAnimationFrame(animate);
