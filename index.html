@@ -69,6 +69,17 @@
         .page { display: none; animation: fadeIn 0.4s ease forwards; }
         .page.active { display: block; }
 
+        /* Стиль для Ленты Сохр */
+        .live-feed {
+            width: 100%;
+            height: 700px;
+            border-radius: 15px;
+            overflow-y: auto;
+            background: #000;
+            border: 1px solid var(--primary);
+            box-shadow: 0 0 20px rgba(46, 204, 113, 0.2);
+        }
+
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -90,6 +101,7 @@
             </div>
             <div class="menu-grid">
                 <a href="https://t.me/VelikieBs" class="btn btn-main">🚀 ВОЙТИ В ЧАТ</a>
+                <div class="btn" onclick="showPage('live')" style="border-color: var(--gold); color: var(--gold);">📺 Лента Величия</div>
                 <div class="btn" onclick="showPage('rules')">📜 Законы</div>
                 <div class="btn" onclick="showPage('donate')">💎 Донаты</div>
                 <div class="btn" onclick="showPage('admin')">📝 Анкета</div>
@@ -98,31 +110,39 @@
             </div>
         </div>
 
+        <div id="live" class="page">
+            <div class="card" style="padding: 10px;">
+                <h2 style="color: var(--gold); text-align:center; margin-bottom:15px;">🎬 ЛЕНТА СОХР</h2>
+                <div class="live-feed">
+                    <script async src="https://telegram.org/js/telegram-widget.js?22" 
+                        data-telegram-channel="VelikieSohri" 
+                        data-width="100%" 
+                        data-color="2ecc71" 
+                        data-dark="1"></script>
+                </div>
+            </div>
+            <button class="back-btn" onclick="showPage('home')">← НАЗАД</button>
+        </div>
+
         <div id="rules" class="page">
             <div class="card full-rules">
                 <h2 style="color: var(--gold); text-align:center; text-transform: uppercase;">🌋 ВЕЛИКИЕ ЗАКОНЫ</h2>
-                
                 <span class="rules-cat">🚫 ЗАПРЕЩЕНО:</span>
                 <div class="rule-item"><b>СПАМ:</b> лесенки, повторяющиеся символы, гифки, видео, флуд командами и т.д. (Мут 15 мин - 1ч)</div>
                 <div class="rule-item"><b>РЕКЛАМА:</b> любая без согласования с владельцем запрещена. (Мут-Бан)</div>
                 <div class="rule-item"><b>ЗАМЕЩЕНИЕ:</b> попытка замещения владельца без разрешения. (Мут-Бан)</div>
                 <div class="rule-item"><b>КОНТЕНТ 18+ 16+:</b> разрешён после 22:00 по МСК. <b>ВСЕГДА ЗАПРЕЩЕНЫ:</b> Детский контент, зоофилия, насилие, резня и т.п. (Мут-Пред)</div>
-
                 <span class="rules-cat">📮 ЗАПРЕЩЁННЫЕ ТЕМЫ:</span>
                 <div class="rule-item">Оскорбления нации, религия, политика, дипломатия. (Мут 10–35 мин)</div>
                 <div class="rule-item">Обсуждение наркотиков на серьезной основе. (Мут 25 мин–24 ч / Пред / Бан)</div>
                 <div class="rule-item">Треш-контент (Мут / Пред / Бан)</div>
-
                 <span class="rules-cat">🔞 ПДФ (ПЕДОФИЛИЯ):</span>
                 <div class="rule-item">Наказываются любые склонности к пдф. (Пред-Бан)</div>
                 <div class="rule-item">Темы, относящиеся к пдф по факту. (Мут / Пред)</div>
-                <p style="font-size: 0.8rem; margin: 5px 0;">* При просьбе удалить такой контент — удалите сразу, мы заботимся о комфорте.</p>
-
                 <span class="rules-cat">⚠️ ПОРЯДОК:</span>
                 <div class="rule-item">Конфликты, провокации, оскорбления, ссоры. (Мут 15 мин – 1 ч / Пред / Бан)</div>
                 <div class="rule-item">Обход наказания любыми путями. (×2 к сроку / Бан виновнику)</div>
                 <div class="rule-item">При ложном репорте. (Мут на 15-25 мин)</div>
-
                 <span class="rules-cat">⚙️ ДОПОЛНИТЕЛЬНО:</span>
                 • Наказание без предупреждения при повторных нарушениях.<br>
                 • 4 предупреждения — автоматический бан.<br>
@@ -136,7 +156,6 @@
         <div id="donate" class="page">
             <div class="card">
                 <h2 style="color: var(--gold); text-align:center; margin-bottom:25px;">💎 ПОДДЕРЖКА</h2>
-                
                 <div class="don-card">
                     <div class="don-header">💛 Спонсор (200 ₽ / 60 дней)</div>
                     <ul class="don-list">
@@ -149,7 +168,6 @@
                         <a href="https://t.me/VelikieDonateBot?start=pay_card" class="btn-pay btn-card">КАРТОЙ</a>
                     </div>
                 </div>
-
                 <div class="don-card">
                     <div class="don-header">🧡 Спонсор+ (400 ₽ / 60 дней)</div>
                     <ul class="don-list">
@@ -163,7 +181,6 @@
                         <a href="https://t.me/VelikieDonateBot?start=pay_card" class="btn-pay btn-card">КАРТОЙ</a>
                     </div>
                 </div>
-
                 <div class="don-card">
                     <div class="don-header">⚖️ Амнистия (300 ₽)</div>
                     <ul class="don-list">
@@ -176,7 +193,6 @@
                         <a href="https://t.me/VelikieDonateBot?start=pay_card" class="btn-pay btn-card">КАРТОЙ</a>
                     </div>
                 </div>
-
                 <div class="don-card">
                     <div class="don-header">💬 Временный Префикс (70 ₽)</div>
                     <ul class="don-list">
@@ -188,7 +204,6 @@
                         <a href="https://t.me/VelikieDonateBot?start=pay_card" class="btn-pay btn-card">КАРТОЙ</a>
                     </div>
                 </div>
-
                 <div class="don-card" style="border:none;">
                     <div class="don-header">💎 Инвестор (5000 ₽ / 1 ГОД)</div>
                     <ul class="don-list">
@@ -278,7 +293,6 @@
                 grid.innerHTML = '';
                 rows.forEach(row => {
                     const cols = row.split(',').map(c => c.replace(/"/g, '').trim());
-                    // Димасик и другие появятся, если их ID/имя есть в 1-й колонке таблицы
                     if(cols[0] && cols[0].length > 1) { 
                         const img = `https://wsrv.nl/?url=${encodeURIComponent(cols[2])}&w=150&h=150&fit=cover&mask=circle`;
                         grid.innerHTML += `<div class="member"><div class="avatar-wrap"><img src="${img}" class="avatar"></div><b>${cols[0]}</b><span>${cols[1]}</span></div>`;
