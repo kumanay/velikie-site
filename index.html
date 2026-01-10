@@ -34,14 +34,6 @@
 
         .card { background: var(--card-bg); border: 1px solid rgba(46, 204, 113, 0.2); padding: 25px; border-radius: 20px; margin-bottom: 20px; backdrop-filter: blur(15px); box-shadow: 0 15px 35px rgba(0,0,0,0.6); }
         
-        .hall-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
-        .member { text-align: center; padding: 5px; }
-        .avatar-wrap { position: relative; width: 65px; height: 65px; margin: 0 auto 10px; }
-        .avatar-wrap::after { content: ''; position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px; border-radius: 50%; border: 2px solid var(--gold); animation: rotate 8s linear infinite; box-shadow: 0 0 10px var(--gold-glow); }
-        .avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #111; }
-        .member b { display: block; color: #fff; font-size: 0.75rem; margin-top: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .member span { display: block; color: var(--gold); font-size: 0.6rem; text-transform: uppercase; }
-
         .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .btn { background: rgba(255,255,255,0.05); border: 1px solid var(--primary); color: white; padding: 18px; border-radius: 12px; cursor: pointer; text-align: center; transition: 0.3s; font-weight: bold; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 8px; }
         .btn:hover { background: var(--primary); color: #000; transform: translateY(-3px); }
@@ -84,10 +76,7 @@
                 <h1>ВЕЛИКИЕ</h1>
                 <div class="chat-stats" id="chat-count">🔥 В ЧАТЕ: 1,240 УЧАСТНИКОВ</div>
             </header>
-            <div class="card">
-                <h3 style="color: var(--gold); text-align: center; text-transform: uppercase;">🏆 Зал Славы</h3>
-                <div class="hall-grid" id="hall-of-fame">Загрузка легенд...</div>
-            </div>
+
             <div class="menu-grid">
                 <a href="https://t.me/VelikieBs" class="btn btn-main">🚀 ВОЙТИ В ЧАТ</a>
                 <div class="btn" onclick="showPage('rules')">📜 Законы</div>
@@ -244,7 +233,6 @@
     <script>
         const BOT_TOKEN = '8585491155:AAHzbeeEIPVSyI3Q3J5FfbxRLZ21GrioRnE';
         const CHAT_ID = '-1002207962264';
-        const SHEET_URL = `https://docs.google.com/spreadsheets/d/1T9OYL6gd_73llbvdg0zUw43hF0GauaauYF1DYWqWKNs/gviz/tq?tqx=out:csv`;
 
         async function sendToBot(category) {
             let text = "";
@@ -268,25 +256,6 @@
                 alert("Успешно!"); showPage('home');
             } catch(e) { alert("Ошибка!"); }
         }
-
-        async function loadHallOfFame() {
-            try {
-                const res = await fetch(SHEET_URL);
-                const data = await res.text();
-                const rows = data.split('\n').slice(1);
-                const grid = document.getElementById('hall-of-fame');
-                grid.innerHTML = '';
-                rows.forEach(row => {
-                    const cols = row.split(',').map(c => c.replace(/"/g, '').trim());
-                    // Димасик и другие появятся, если их ID/имя есть в 1-й колонке таблицы
-                    if(cols[0] && cols[0].length > 1) { 
-                        const img = `https://wsrv.nl/?url=${encodeURIComponent(cols[2])}&w=150&h=150&fit=cover&mask=circle`;
-                        grid.innerHTML += `<div class="member"><div class="avatar-wrap"><img src="${img}" class="avatar"></div><b>${cols[0]}</b><span>${cols[1]}</span></div>`;
-                    }
-                });
-            } catch(e) { console.log("Hall of Fame Error"); }
-        }
-        loadHallOfFame();
 
         function showPage(p) {
             document.querySelectorAll('.page').forEach(div => div.classList.remove('active'));
